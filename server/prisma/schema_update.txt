@@ -1,0 +1,11 @@
+Update PageView model to add these fields after duration:
+  utmSource     String?   @map("utm_source")
+  utmMedium     String?   @map("utm_medium")
+  utmCampaign   String?   @map("utm_campaign")
+  utmContent    String?   @map("utm_content")
+  utmTerm       String?   @map("utm_term")
+
+Add these indexes after the existing @@index lines:
+  @@index([utmSource])
+  @@index([utmCampaign])
+  @@index([utmMedium])

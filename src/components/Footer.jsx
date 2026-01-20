@@ -1,0 +1,289 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { useLanguage } from '../utils/contexts';
+import { validateEmail } from '../utils/helpers';
+
+const Footer = () => {
+  const { t } = useLanguage();
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState({ type: '', message: '' });
+
+  const handleNewsletterSubmit = (e) => {
+    e.preventDefault();
+    if (!validateEmail(email)) {
+      setStatus({ type: 'error', message: 'Please enter a valid email address' });
+      return;
+    }
+    setStatus({ type: 'success', message: 'Thank you for subscribing!' });
+    setEmail('');
+    setTimeout(() => setStatus({ type: '', message: '' }), 3000);
+  };
+
+  const footerLinks = {
+    programs: [
+      { label: 'AI Fundamentals', path: '#programs' },
+      { label: 'AIpreneurs', path: '#programs' },
+      { label: 'Data Science', path: '#programs' },
+      { label: 'Banking Workshop', path: '#programs' },
+      { label: 'Corporate Training', path: '#programs' }
+    ],
+    company: [
+      { label: 'About Us', path: '#about' },
+      { label: 'Our Team', path: '#about' },
+      { label: 'Careers', path: '#careers' },
+      { label: 'Contact', path: '#contact' }
+    ],
+    resources: [
+      { label: 'Blog', path: '#resources' },
+      { label: 'News', path: '#resources' },
+      { label: 'FAQ', path: '#contact' },
+      { label: 'Support', path: '#contact' }
+    ],
+    legal: [
+      { label: 'Privacy Policy', path: '#contact' },
+      { label: 'Terms of Service', path: '#contact' },
+      { label: 'Cookie Policy', path: '#contact' }
+    ]
+  };
+
+  return (
+    <footer style={footerStyles.footer}>
+      <div className="container">
+        <div style={footerStyles.topSection}>
+          <div style={footerStyles.brand}>
+            <div style={footerStyles.logo}>
+              <span className="mono-text" style={{ fontSize: '1.75rem', fontWeight: '800' }}>
+                AI<span className="gradient-text">Station</span>
+              </span>
+            </div>
+            <p style={footerStyles.tagline}>{t('footer.tagline')}</p>
+
+            <div style={footerStyles.social}>
+              {[
+                { icon: '📘', label: 'Facebook', url: '#' },
+                { icon: '📸', label: 'Instagram', url: '#' },
+                { icon: '💼', label: 'LinkedIn', url: '#' },
+                { icon: '📱', label: 'Telegram', url: '#' }
+              ].map((social, index) => (
+                <motion.a
+                  key={index}
+                  href={social.url}
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  style={footerStyles.socialLink}
+                  aria-label={social.label}
+                >
+                  <span style={{ fontSize: '1.5rem' }}>{social.icon}</span>
+                </motion.a>
+              ))}
+            </div>
+          </div>
+
+          <div style={footerStyles.linksGrid}>
+            <div style={footerStyles.linkColumn}>
+              <h4 style={footerStyles.columnTitle}>Programs</h4>
+              {footerLinks.programs.map((link, index) => (
+                <a key={index} href={link.path} style={footerStyles.link}>
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            <div style={footerStyles.linkColumn}>
+              <h4 style={footerStyles.columnTitle}>Company</h4>
+              {footerLinks.company.map((link, index) => (
+                <a key={index} href={link.path} style={footerStyles.link}>
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            <div style={footerStyles.linkColumn}>
+              <h4 style={footerStyles.columnTitle}>Resources</h4>
+              {footerLinks.resources.map((link, index) => (
+                <a key={index} href={link.path} style={footerStyles.link}>
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            <div style={footerStyles.linkColumn}>
+              <h4 style={footerStyles.columnTitle}>{t('footer.newsletter')}</h4>
+              <form onSubmit={handleNewsletterSubmit} style={footerStyles.newsletter}>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={t('footer.emailPlaceholder')}
+                  style={footerStyles.newsletterInput}
+                  className="form-input"
+                />
+                <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: 'var(--space-1)' }}>
+                  {t('footer.subscribe')}
+                </button>
+              </form>
+              {status.message && (
+                <p style={{
+                  ...footerStyles.statusMessage,
+                  color: status.type === 'success' ? 'var(--secondary-emerald)' : '#EF4444'
+                }}>
+                  {status.message}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div style={footerStyles.bottomSection}>
+          <div style={footerStyles.legalLinks}>
+            {footerLinks.legal.map((link, index) => (
+              <React.Fragment key={index}>
+                <a href={link.path} style={footerStyles.legalLink}>
+                  {link.label}
+                </a>
+                {index < footerLinks.legal.length - 1 && <span style={{ color: 'var(--text-secondary)' }}>•</span>}
+              </React.Fragment>
+            ))}
+          </div>
+          <p style={footerStyles.copyright}>
+            © {new Date().getFullYear()} AI Station. {t('footer.allRightsReserved')}
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+const footerStyles = {
+  footer: {
+    background: '#000000',  // Pure black for Wolf Pack aesthetic
+    color: '#FFFFFF',
+    padding: 'var(--space-12) 0 var(--space-6)',
+    marginTop: 'auto'
+  },
+  topSection: {
+    display: 'grid',
+    gridTemplateColumns: '1.5fr 2.5fr',
+    gap: 'var(--space-8)',
+    marginBottom: 'var(--space-8)',
+    paddingBottom: 'var(--space-8)',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+  },
+  brand: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 'var(--space-3)'
+  },
+  logo: {
+    marginBottom: 'var(--space-2)'
+  },
+  tagline: {
+    fontSize: 'var(--text-body)',
+    color: '#A3A3A3',  // Gray-400 for readable contrast
+    maxWidth: '300px',
+    lineHeight: 1.6
+  },
+  social: {
+    display: 'flex',
+    gap: 'var(--space-2)',
+    marginTop: 'var(--space-2)'
+  },
+  socialLink: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '44px',
+    height: '44px',
+    borderRadius: 'var(--radius-sm)',
+    background: '#262626',  // Dark gray for contrast
+    textDecoration: 'none',
+    transition: 'all 0.3s ease'
+  },
+  linksGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    gap: 'var(--space-6)'
+  },
+  linkColumn: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 'var(--space-2)'
+  },
+  columnTitle: {
+    fontSize: 'var(--text-h4)',
+    fontWeight: 700,
+    marginBottom: 'var(--space-2)',
+    color: '#FFFFFF',  // Pure white
+    fontFamily: 'var(--font-display)'
+  },
+  link: {
+    fontSize: 'var(--text-body)',
+    color: '#A3A3A3',  // Gray-400 for readable contrast
+    textDecoration: 'none',
+    transition: 'color 0.3s ease'
+  },
+  newsletter: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 'var(--space-2)'
+  },
+  newsletterInput: {
+    background: '#262626',  // Dark gray background
+    border: '1px solid #404040',  // Medium gray border
+    color: '#FFFFFF'  // White text
+  },
+  statusMessage: {
+    fontSize: 'var(--text-small)',
+    marginTop: 'var(--space-1)'
+  },
+  bottomSection: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: 'var(--space-3)',
+    paddingTop: 'var(--space-6)'
+  },
+  legalLinks: {
+    display: 'flex',
+    gap: 'var(--space-2)',
+    alignItems: 'center',
+    flexWrap: 'wrap'
+  },
+  legalLink: {
+    fontSize: 'var(--text-small)',
+    color: '#737373',  // Gray-500 for subtle text
+    textDecoration: 'none',
+    transition: 'color 0.3s ease'
+  },
+  copyright: {
+    fontSize: 'var(--text-small)',
+    color: '#737373'  // Gray-500 for subtle text
+  }
+};
+
+// Responsive styles
+const responsiveStyle = document.createElement('style');
+responsiveStyle.textContent = `
+  @media (max-width: 1024px) {
+    .footer .top-section {
+      grid-template-columns: 1fr !important;
+    }
+    .footer .links-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+  @media (max-width: 640px) {
+    .footer .links-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .footer .bottom-section {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+`;
+document.head.appendChild(responsiveStyle);
+
+export default Footer;

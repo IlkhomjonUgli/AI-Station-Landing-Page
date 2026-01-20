@@ -1,0 +1,179 @@
+// Prisma schema for AI Station database
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
+  passwordHash String    @map("password_hash")
+  name         String
+  role         String    @default("admin")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+  
+  posts        Post[]
+
+  @@map("users")
+}
+
+model Post {
+  id             Int       @id @default(autoincrement())
+  title          String
+  slug           String    @unique
+  content        String    @db.Text
+  excerpt        String?   @db.Text
+  type           String    // 'blog' or 'news'
+  status         String    @default("draft") // 'draft', 'published', 'archived'
+  featuredImage  String?   @map("featured_image")
+  authorId       Int       @map("author_id")
+  publishedAt    DateTime? @map("published_at")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+  views          Int       @default(0)
+  
+  author         User      @relation(fields: [authorId], references: [id])
+  tags           PostTag[]
+
+  @@index([type])
+  @@index([status])
+  @@index([publishedAt(sort: Desc)])
+  @@map("posts")
+}
+
+model Tag {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  slug  String @unique
+  
+  posts PostTag[]
+
+  @@map("tags")
+}
+
+model PostTag {
+  postId Int @map("post_id")
+  tagId  Int @map("tag_id")
+  
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([postId, tagId])
+  @@map("post_tags")
+}
+model TeamMember {
+  id        Int      @id @default(autoincrement())
+  name      String
+  role      String
+  bio       String?  @db.Text
+  image     String?
+  linkedin  String?
+  twitter   String?
+  github    String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([order])
+  @@map("team_members")
+}
+
+model PageView {
+  id            Int       @id @default(autoincrement())
+  sessionId     String    @map("session_id")
+  path          String
+  referrer      String?
+  userAgent     String?   @map("user_agent")
+  ipAddress     String?   @map("ip_address")
+  country       String?
+  city          String?
+  duration      Int?
+  utmSource     String?   @map("utm_source")
+  utmMedium     String?   @map("utm_medium")
+  utmCampaign   String?   @map("utm_campaign")
+  utmContent    String?   @map("utm_content")
+  utmTerm       String?   @map("utm_term")
+  createdAt     DateTime  @default(now()) @map("created_at")
+
+  @@index([sessionId])
+  @@index([path])
+  @@index([createdAt])
+  @@index([utmSource])
+  @@index([utmCampaign])
+  @@index([utmMedium])
+  @@map("page_views")
+}
+
+model Session {
+  id            String    @id @default(cuid())
+  firstVisit    DateTime  @default(now()) @map("first_visit")
+  lastVisit     DateTime  @updatedAt @map("last_visit")
+  pageCount     Int       @default(0) @map("page_count")
+  referrer      String?
+  isReturning   Boolean   @default(false) @map("is_returning")
+
+  @@map("sessions")
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  icon        String?  // Emoji or icon identifier
+  category    String?
+  popular     Boolean  @default(false)
+  order       Int      @default(0)
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("services")
+}
+
+model Program {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String   @db.Text
+  duration    String   // e.g., "12 weeks", "6 months"
+  level       String   // e.g., "Beginner", "Intermediate", "Advanced"
+  features    Json     // Array of features/highlights
+  price       String?  // Optional pricing info
+  icon        String?  // Emoji or icon identifier
+  popular     Boolean  @default(false)
+  order       Int      @default(0)
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("programs")
+}
+
+model Portfolio {
+  id           Int      @id @default(autoincrement())
+  title        String
+  client       String
+  category     String
+  description  String   @db.Text
+  challenge    String   @db.Text
+  solution     String   @db.Text
+  results      Json     // Array of result strings
+  technologies Json     // Array of technology strings
+  image        String?  // Emoji or icon
+  gradient     String?  // CSS gradient variable
+  featured     Boolean  @default(false)
+  isActive     Boolean  @default(true) @map("is_active")
+  order        Int      @default(0)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@index([category])
+  @@index([isActive])
+  @@index([order])
+  @@map("portfolios")
+}
