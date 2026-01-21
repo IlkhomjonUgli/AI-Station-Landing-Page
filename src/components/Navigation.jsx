@@ -75,11 +75,11 @@ const Navigation = () => {
     setIsMobileMenuOpen(false);
   }, [location]);
 
-  // Build nav links - hardcoded to match current site structure with translations
+  // Build nav links - all scroll to landing page sections
   const allNavLinks = [
     { path: '#home', label: t('nav.home'), section: 'home', show: true },
-    { path: '/services', label: t('nav.services'), section: 'services', show: true, external: true },
-    { path: '/programs', label: t('nav.programs'), section: 'programs', show: true, external: true },
+    { path: '#services', label: t('nav.services'), section: 'services', show: true },
+    { path: '#programs', label: t('nav.programs'), section: 'programs', show: true },
     { path: '#portfolio', label: t('nav.portfolio'), section: 'portfolio', show: true },
     { path: '#mentors', label: t('nav.mentors') || 'Mentors', section: 'mentors', show: true },
     { path: '/blog', label: t('nav.blog') || 'Blog', section: 'blog', show: contentExists.blog, external: true },
