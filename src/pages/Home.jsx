@@ -411,7 +411,8 @@ const Home = () => {
         </section>
       )}
 
-      {/* Careers Section */}
+      {/* Careers Section - Hidden for now */}
+      {/*
       <section id="careers" className="section" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container">
           <motion.div
@@ -451,6 +452,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      */}
 
       {/* Contact Section */}
       <section id="contact" className="section">
