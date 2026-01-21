@@ -6,8 +6,7 @@ import { fadeInUp } from '../utils/helpers';
 const Hero = () => {
   return (
     <section style={heroStyles.section}>
-      {/* Futuristic gradient overlay */}
-      <div style={heroStyles.overlay} />
+      {/* Overlay removed - background handled by body */}
 
       <div className="container" style={heroStyles.container}>
         <motion.div
