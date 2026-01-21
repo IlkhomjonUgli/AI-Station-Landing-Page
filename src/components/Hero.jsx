@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { fadeInUp } from '../utils/helpers';
-import { useLanguage } from '../utils/contexts';
 
 const Hero = () => {
-  const { t } = useLanguage();
-
   return (
     <section style={heroStyles.section}>
+      {/* Futuristic gradient overlay */}
+      <div style={heroStyles.overlay} />
+
       <div className="container" style={heroStyles.container}>
         <motion.div
           initial="hidden"
@@ -16,18 +16,28 @@ const Hero = () => {
           variants={fadeInUp}
           style={heroStyles.content}
         >
+          {/* Kicker text */}
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.4 }}
+            style={heroStyles.kicker}
+          >
+            CENTRAL EURASIA'S INNOVATION HUB
+          </motion.span>
+
           <motion.h1
             className="hero-title"
             style={heroStyles.title}
             variants={fadeInUp}
           >
-            {t('hero.title').split(' ').map((word, i) => (
+            {'Next Stop: Innovation'.split(' ').map((word, i) => (
               <motion.span
                 key={i}
                 style={{ display: 'inline-block', marginRight: '0.3em' }}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1, duration: 0.4 }}
+                transition={{ delay: 0.2 + i * 0.1, duration: 0.4 }}
               >
                 {word}
               </motion.span>
@@ -35,42 +45,49 @@ const Hero = () => {
           </motion.h1>
 
           <motion.p
-            variants={fadeInUp}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
             style={heroStyles.subtitle}
           >
-            {t('hero.subtitle')}
+            We are the bridge between academia and industry, co-creating AI solutions
+            with corporations and developing the next generation of AI entrepreneurs.
           </motion.p>
 
           <motion.div
-            variants={fadeInUp}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.5 }}
             style={heroStyles.ctaButtons}
           >
             <Link to="/programs" className="btn btn-primary">
-              <span>{t('hero.getStarted')}</span>
+              <span>Join the Ecosystem</span>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
             <Link to="/about" className="btn btn-secondary">
-              {t('hero.learnMore')}
+              Explore Our Vision
             </Link>
           </motion.div>
 
           <motion.div
-            variants={fadeInUp}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.5 }}
             style={heroStyles.stats}
           >
             <div style={heroStyles.statItem}>
               <div style={heroStyles.statNumber}>300+</div>
-              <div style={heroStyles.statLabel}>Students</div>
+              <div style={heroStyles.statLabel}>Community Members</div>
             </div>
             <div style={heroStyles.statItem}>
               <div style={heroStyles.statNumber}>50+</div>
-              <div style={heroStyles.statLabel}>Projects</div>
+              <div style={heroStyles.statLabel}>AI Projects</div>
             </div>
             <div style={heroStyles.statItem}>
-              <div style={heroStyles.statNumber}>95%</div>
-              <div style={heroStyles.statLabel}>Success Rate</div>
+              <div style={heroStyles.statNumber}>15+</div>
+              <div style={heroStyles.statLabel}>Corporate Partners</div>
             </div>
           </motion.div>
         </motion.div>
@@ -87,8 +104,16 @@ const heroStyles = {
     alignItems: 'center',
     paddingTop: '120px',
     paddingBottom: 'var(--space-12)',
-    background: 'var(--bg-primary)',  // Responds to theme (white in light, black in dark)
     overflow: 'hidden'
+  },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'linear-gradient(135deg, rgba(107, 151, 252, 0.1) 0%, rgba(118, 125, 251, 0.05) 50%, rgba(84, 88, 255, 0.1) 100%)',
+    zIndex: 1
   },
   container: {
     position: 'relative',
@@ -99,6 +124,17 @@ const heroStyles = {
     textAlign: 'left',
     color: 'var(--text-primary)'
   },
+  kicker: {
+    display: 'inline-block',
+    fontSize: 'var(--text-small)',
+    fontWeight: 700,
+    letterSpacing: '0.2em',
+    color: 'var(--primary-spectrum)',
+    marginBottom: 'var(--space-3)',
+    background: 'rgba(84, 88, 255, 0.1)',
+    padding: '8px 16px',
+    borderRadius: 'var(--radius-sm)'
+  },
   title: {
     marginBottom: 'var(--space-4)',
     lineHeight: 1.1,
@@ -108,11 +144,11 @@ const heroStyles = {
     letterSpacing: '-0.04em'
   },
   subtitle: {
-    fontSize: 'var(--text-h3)',
+    fontSize: 'var(--text-h4)',
     color: 'var(--text-secondary)',
     marginBottom: 'var(--space-6)',
     maxWidth: '700px',
-    lineHeight: 1.6
+    lineHeight: 1.7
   },
   ctaButtons: {
     display: 'flex',
@@ -124,7 +160,7 @@ const heroStyles = {
     display: 'flex',
     gap: 'var(--space-8)',
     paddingTop: 'var(--space-4)',
-    borderTop: '1px solid var(--border-color)',
+    borderTop: '1px solid rgba(107, 151, 252, 0.2)',
     flexWrap: 'wrap'
   },
   statItem: {

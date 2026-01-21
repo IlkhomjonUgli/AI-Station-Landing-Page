@@ -1,59 +1,69 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { buildURL, API_ENDPOINTS } from '../config/api';
-import { useLanguage } from '../utils/contexts';
 
 const Services = () => {
-  const { t } = useLanguage();
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [services, setServices] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchServices();
-  }, []);
-
-  const fetchServices = async () => {
-    try {
-      const response = await fetch(buildURL(API_ENDPOINTS.services));
-      const data = await response.json();
-      if (data.success) {
-        setServices(data.data.services);
-      }
-    } catch (error) {
-      console.error('Error fetching services:', error);
-    } finally {
-      setLoading(false);
+  // Engagement Models (The 3 Formats)
+  const engagementModels = [
+    {
+      id: 'hybrid',
+      icon: '🔄',
+      title: 'The Hybrid Bootcamp',
+      duration: '3-4 Weeks',
+      description: 'Intensive training combining online workshops with offline sessions and a final Demo Day.',
+      bestFor: 'Government entities & Large Enterprises',
+      features: [
+        'Blended learning approach',
+        'In-person Demo Day',
+        'Dedicated project mentors',
+        'Custom curriculum design'
+      ],
+      highlight: true
+    },
+    {
+      id: 'digital',
+      icon: '🌐',
+      title: 'The Digital Sprint',
+      duration: '3-4 Weeks',
+      description: 'Fully remote online training with virtual workshops and digital Demo Day.',
+      bestFor: 'Remote teams & International partners',
+      features: [
+        '100% remote delivery',
+        'Virtual Demo Day',
+        'Async learning materials',
+        'Global time zone flexibility'
+      ],
+      highlight: false
+    },
+    {
+      id: 'offline',
+      icon: '🏢',
+      title: 'The Offline Immersion',
+      duration: '3-4 Weeks',
+      description: 'Hands-on offline training at our Hub with direct mentorship and supervision.',
+      bestFor: 'Technical teams requiring deep-dive supervision',
+      features: [
+        'At our Hub in Tashkent',
+        'Direct mentor access',
+        'Intensive hands-on labs',
+        'Team collaboration focus'
+      ],
+      highlight: false
     }
-  };
-
-  // Category icons mapping
-  const categoryIcons = {
-    'consulting': '💼',
-    'development': '⚙️',
-    'analytics': '📊',
-    'training': '🎓',
-    'integration': '🔗',
-    'optimization': '🔍',
-    'strategy': '🎯',
-    'automation': '🤖'
-  };
-
-  // Build categories dynamically from services
-  const uniqueCategories = [...new Set(services.map(s => s.category).filter(Boolean))];
-  const categories = [
-    { id: 'all', label: t('servicesPage.allServices'), icon: '🎯' },
-    ...uniqueCategories.map(cat => ({
-      id: cat,
-      label: cat.charAt(0).toUpperCase() + cat.slice(1).replace(/-/g, ' '),
-      icon: categoryIcons[cat] || '📁'
-    }))
   ];
 
-  const filteredServices = activeCategory === 'all'
-    ? services
-    : services.filter(service => service.category === activeCategory);
+  // Industry Sectors
+  const sectors = [
+    { icon: '🏦', name: 'Banking & Fintech', caseStudy: 'Aloqabank' },
+    { icon: '⚖️', name: 'Public Sector & Government', caseStudy: 'Ministry of Justice' },
+    { icon: '📡', name: 'Telecommunications', caseStudy: null },
+    { icon: '🏥', name: 'Healthcare', caseStudy: null },
+    { icon: '🛡️', name: 'Insurance', caseStudy: null },
+    { icon: '🚚', name: 'Logistics & Transport', caseStudy: null },
+    { icon: '🎓', name: 'Education', caseStudy: null },
+    { icon: '🛒', name: 'Retail & E-commerce', caseStudy: null },
+    { icon: '🏭', name: 'Manufacturing & Industrial', caseStudy: null }
+  ];
 
   return (
     <div style={styles.page}>
@@ -66,98 +76,162 @@ const Services = () => {
             transition={{ duration: 0.6 }}
             style={styles.heroContent}
           >
+            <span style={styles.kicker}>CORPORATE INNOVATION</span>
             <h1 className="hero-title" style={styles.title}>
-              {t('servicesPage.heroTitle')} <span className="gradient-text">{t('servicesPage.heroTitleHighlight')}</span>
+              Industry Innovation <span className="gradient-text">Tracks</span>
             </h1>
             <p style={styles.subtitle}>
-              {t('servicesPage.heroSubtitle')}
+              Tailored AI transformation programs designed for enterprise needs.
+              Choose your format, select your industry, and let us drive results.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="section">
+      {/* Engagement Models Section */}
+      <section className="section" style={styles.modelsSection}>
         <div className="container">
-          {loading ? (
-            <div style={{ textAlign: 'center', padding: 'var(--space-8)' }}>
-              <p style={{ color: 'var(--text-secondary)' }}>Loading services...</p>
-            </div>
-          ) : (
-            <>
-              {/* Category Filters - only show if there are categories */}
-              {categories.length > 1 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  style={styles.filters}
-                >
-                  {categories.map((category) => (
-                    <button
-                      key={category.id}
-                      onClick={() => setActiveCategory(category.id)}
-                      style={{
-                        ...styles.filterBtn,
-                        ...(activeCategory === category.id ? styles.filterBtnActive : {})
-                      }}
-                    >
-                      <span style={{ marginRight: '8px' }}>{category.icon}</span>
-                      <span>{category.label}</span>
-                    </button>
-                  ))}
-                </motion.div>
-              )}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={styles.sectionHeader}
+          >
+            <span style={styles.sectionKicker}>CHOOSE YOUR FORMAT</span>
+            <h2 style={styles.sectionTitle}>Engagement Models</h2>
+            <p style={styles.sectionSubtitle}>
+              Three proven delivery formats to match your organization's needs and constraints
+            </p>
+          </motion.div>
 
-              {/* Services Grid */}
+          <div style={styles.modelsGrid}>
+            {engagementModels.map((model, index) => (
               <motion.div
-                layout
-                style={styles.servicesGrid}
+                key={model.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.15 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                style={{
+                  ...styles.modelCard,
+                  ...(model.highlight ? styles.modelCardHighlight : {})
+                }}
               >
-                {filteredServices.map((service, index) => (
-                  <motion.div
-                    key={service.id}
-                    layout
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ delay: index * 0.1 }}
-                    style={styles.serviceCard}
-                  >
-                    {service.popular && (
-                      <div style={styles.popularBadge}>
-                        ⭐ {t('servicesPage.mostPopular')}
-                      </div>
-                    )}
-                    <div style={styles.serviceIcon}>
-                      {service.icon && service.icon.startsWith('/') ? (
-                        <img src={service.icon} alt={service.title} style={{ width: '48px', height: '48px' }} />
-                      ) : (
-                        service.icon
-                      )}
+                {model.highlight && (
+                  <div style={styles.recommendedBadge}>RECOMMENDED</div>
+                )}
+
+                <div style={styles.modelIcon}>{model.icon}</div>
+
+                <div style={styles.modelHeader}>
+                  <h3 style={styles.modelTitle}>{model.title}</h3>
+                  <span style={styles.durationBadge}>{model.duration}</span>
+                </div>
+
+                <p style={styles.modelDescription}>{model.description}</p>
+
+                <div style={styles.bestForTag}>
+                  <span style={styles.bestForLabel}>Best For:</span>
+                  <span style={styles.bestForValue}>{model.bestFor}</span>
+                </div>
+
+                <div style={styles.featuresList}>
+                  {model.features.map((feature, idx) => (
+                    <div key={idx} style={styles.featureItem}>
+                      <span style={styles.featureCheck}>✓</span>
+                      <span>{feature}</span>
                     </div>
-                    <h3 style={styles.serviceTitle}>{service.title}</h3>
-                    <p style={styles.serviceDescription}>{service.description}</p>
+                  ))}
+                </div>
 
-                    {service.features && Array.isArray(service.features) && service.features.length > 0 && (
-                      <div style={styles.features}>
-                        {service.features.map((feature, idx) => (
-                          <div key={idx} style={styles.feature}>
-                            <span style={styles.featureCheck}>✓</span>
-                            <span>{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    <Link to="/contact" className="btn btn-primary" style={styles.ctaBtn}>
-                      {t('servicesPage.getStarted')}
-                    </Link>
-                  </motion.div>
-                ))}
+                <Link
+                  to="/#contact"
+                  className={model.highlight ? "btn btn-primary" : "btn btn-secondary"}
+                  style={styles.modelCta}
+                >
+                  Request Proposal
+                </Link>
               </motion.div>
-            </>
-          )}
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Sectors Section */}
+      <section style={styles.sectorsSection}>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={styles.sectionHeader}
+          >
+            <span style={styles.sectionKicker}>INDUSTRY EXPERTISE</span>
+            <h2 style={styles.sectionTitle}>Sectors We Serve</h2>
+            <p style={styles.sectionSubtitle}>
+              Deep domain knowledge across Central Eurasia's key industries
+            </p>
+          </motion.div>
+
+          <div style={styles.sectorsGrid}>
+            {sectors.map((sector, index) => (
+              <motion.div
+                key={sector.name}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                whileHover={{ y: -4, scale: 1.03 }}
+                style={styles.sectorCard}
+              >
+                <div style={styles.sectorIcon}>{sector.icon}</div>
+                <h4 style={styles.sectorName}>{sector.name}</h4>
+                {sector.caseStudy && (
+                  <span style={styles.caseStudyBadge}>
+                    Case Study: {sector.caseStudy}
+                  </span>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process Overview */}
+      <section style={styles.processSection}>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={styles.sectionHeader}
+          >
+            <span style={{ ...styles.sectionKicker, color: 'rgba(255,255,255,0.7)' }}>HOW IT WORKS</span>
+            <h2 style={{ ...styles.sectionTitle, color: 'white' }}>Our Delivery Process</h2>
+          </motion.div>
+
+          <div style={styles.processSteps}>
+            {[
+              { step: '01', title: 'Discovery Call', desc: 'Understand your goals and challenges' },
+              { step: '02', title: 'Custom Proposal', desc: 'Tailored curriculum and timeline' },
+              { step: '03', title: 'Training Delivery', desc: 'Execute the chosen format' },
+              { step: '04', title: 'Demo Day & MVPs', desc: 'Showcase results and prototypes' }
+            ].map((item, index) => (
+              <motion.div
+                key={item.step}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                style={styles.processStep}
+              >
+                <div style={styles.stepNumber}>{item.step}</div>
+                <h4 style={styles.stepTitle}>{item.title}</h4>
+                <p style={styles.stepDesc}>{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -170,16 +244,16 @@ const Services = () => {
             viewport={{ once: true }}
             style={styles.ctaContent}
           >
-            <h2 style={styles.ctaTitle}>{t('servicesPage.ctaTitle')}</h2>
+            <h2 style={styles.ctaTitle}>Ready to Transform Your Organization?</h2>
             <p style={styles.ctaText}>
-              {t('servicesPage.ctaSubtitle')}
+              Let's discuss how our Industry Innovation Tracks can drive measurable results for your team.
             </p>
             <div style={styles.ctaButtons}>
-              <Link to="/contact" className="btn btn-primary" style={{ fontSize: '1.1rem', padding: '16px 40px' }}>
-                {t('servicesPage.scheduleConsultation')}
+              <Link to="/#contact" className="btn btn-ghost" style={{ fontSize: '1.1rem', padding: '16px 40px' }}>
+                Schedule Discovery Call
               </Link>
-              <Link to="/portfolio" className="btn btn-secondary" style={{ fontSize: '1.1rem', padding: '16px 40px' }}>
-                {t('servicesPage.viewOurWork')}
+              <Link to="/portfolio" className="btn btn-secondary" style={{ fontSize: '1.1rem', padding: '16px 40px', background: 'white', color: '#5458FF' }}>
+                View Case Studies
               </Link>
             </div>
           </motion.div>
@@ -195,7 +269,6 @@ const styles = {
     paddingTop: '80px'
   },
   hero: {
-    background: 'var(--bg-secondary)',
     padding: 'var(--space-12) 0 var(--space-8)',
     position: 'relative',
     overflow: 'hidden'
@@ -204,6 +277,14 @@ const styles = {
     textAlign: 'center',
     maxWidth: '900px',
     margin: '0 auto'
+  },
+  kicker: {
+    display: 'inline-block',
+    fontSize: 'var(--text-tiny)',
+    fontWeight: 700,
+    letterSpacing: '0.2em',
+    color: '#5458FF',
+    marginBottom: 'var(--space-2)'
   },
   title: {
     marginBottom: 'var(--space-3)',
@@ -216,100 +297,217 @@ const styles = {
     maxWidth: '700px',
     margin: '0 auto'
   },
-  filters: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: 'var(--space-2)',
-    justifyContent: 'center',
-    marginBottom: 'var(--space-6)'
+  modelsSection: {
+    padding: 'var(--space-8) 0'
   },
-  filterBtn: {
-    padding: '12px 24px',
-    background: '#FFFFFF',
-    border: '2px solid #E5E5E5',
-    borderRadius: '8px',
-    color: '#000000',
-    fontFamily: 'var(--font-display)',
-    fontWeight: 600,
-    fontSize: '14px',
-    cursor: 'pointer',
-    transition: 'all 0.3s ease',
-    display: 'flex',
-    alignItems: 'center'
+  sectionHeader: {
+    textAlign: 'center',
+    marginBottom: 'var(--space-6)',
+    maxWidth: '700px',
+    margin: '0 auto var(--space-6)'
   },
-  filterBtnActive: {
-    background: '#2563EB',
-    color: '#FFFFFF',
-    borderColor: '#2563EB',
-    boxShadow: '0 4px 14px rgba(37, 99, 235, 0.4)'
-  },
-  servicesGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-    gap: 'var(--space-4)',
-    marginTop: 'var(--space-6)'
-  },
-  serviceCard: {
-    background: 'var(--bg-primary)',
-    borderRadius: 'var(--radius-lg)',
-    padding: 'var(--space-4)',
-    border: '1px solid var(--border-color)',
-    boxShadow: 'var(--shadow-sm)',
-    transition: 'all 0.3s ease',
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  popularBadge: {
-    position: 'absolute',
-    top: '16px',
-    right: '16px',
-    background: 'var(--gradient-sunset)',
-    color: 'white',
-    padding: '6px 12px',
-    borderRadius: 'var(--radius-sm)',
-    fontSize: 'var(--text-small)',
-    fontWeight: 700
-  },
-  serviceIcon: {
-    fontSize: '3rem',
+  sectionKicker: {
+    display: 'inline-block',
+    fontSize: 'var(--text-tiny)',
+    fontWeight: 700,
+    letterSpacing: '0.2em',
+    color: '#5458FF',
     marginBottom: 'var(--space-2)'
   },
-  serviceTitle: {
-    fontSize: 'var(--text-h3)',
+  sectionTitle: {
+    fontSize: 'var(--text-h1)',
+    fontWeight: 800,
+    color: 'var(--text-primary)',
     marginBottom: 'var(--space-2)',
-    color: 'var(--text-primary)'
+    fontFamily: 'var(--font-display)'
   },
-  serviceDescription: {
+  sectionSubtitle: {
+    fontSize: 'var(--text-h4)',
     color: 'var(--text-secondary)',
-    marginBottom: 'var(--space-3)',
-    lineHeight: '1.6'
+    lineHeight: 1.6
   },
-  features: {
+  modelsGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: 'var(--space-4)',
+    maxWidth: '1200px',
+    margin: '0 auto'
+  },
+  modelCard: {
+    background: 'rgba(255, 255, 255, 0.95)',
+    backdropFilter: 'blur(10px)',
+    borderRadius: 'var(--radius-xl)',
+    padding: 'var(--space-5)',
+    border: '2px solid rgba(107, 151, 252, 0.15)',
     display: 'flex',
     flexDirection: 'column',
-    gap: 'var(--space-1)',
+    position: 'relative',
+    transition: 'all 0.3s ease'
+  },
+  modelCardHighlight: {
+    border: '2px solid #5458FF',
+    boxShadow: '0 8px 32px rgba(84, 88, 255, 0.15)'
+  },
+  recommendedBadge: {
+    position: 'absolute',
+    top: '-12px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    background: 'linear-gradient(135deg, #5458FF 0%, #6B97FC 100%)',
+    color: 'white',
+    fontSize: '10px',
+    fontWeight: 700,
+    padding: '6px 16px',
+    borderRadius: '20px',
+    letterSpacing: '0.1em'
+  },
+  modelIcon: {
+    fontSize: '3rem',
+    marginBottom: 'var(--space-3)'
+  },
+  modelHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 'var(--space-2)'
+  },
+  modelTitle: {
+    fontSize: 'var(--text-h3)',
+    fontWeight: 700,
+    color: 'var(--text-primary)',
+    fontFamily: 'var(--font-display)',
+    margin: 0
+  },
+  durationBadge: {
+    fontSize: 'var(--text-tiny)',
+    fontWeight: 600,
+    padding: '4px 10px',
+    borderRadius: '6px',
+    background: 'rgba(84, 88, 255, 0.1)',
+    color: '#5458FF'
+  },
+  modelDescription: {
+    fontSize: 'var(--text-body)',
+    color: 'var(--text-secondary)',
+    lineHeight: 1.6,
+    marginBottom: 'var(--space-3)'
+  },
+  bestForTag: {
+    background: 'linear-gradient(135deg, rgba(84, 88, 255, 0.08) 0%, rgba(107, 151, 252, 0.08) 100%)',
+    borderRadius: 'var(--radius-md)',
+    padding: 'var(--space-2)',
+    marginBottom: 'var(--space-3)'
+  },
+  bestForLabel: {
+    fontSize: 'var(--text-tiny)',
+    fontWeight: 700,
+    color: '#5458FF',
+    display: 'block',
+    marginBottom: '4px'
+  },
+  bestForValue: {
+    fontSize: 'var(--text-small)',
+    color: 'var(--text-secondary)',
+    fontWeight: 500
+  },
+  featuresList: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
     marginBottom: 'var(--space-4)',
     flex: 1
   },
-  feature: {
+  featureItem: {
     display: 'flex',
     alignItems: 'center',
-    gap: 'var(--space-1)',
-    color: 'var(--text-secondary)',
-    fontSize: 'var(--text-small)'
+    gap: '8px',
+    fontSize: 'var(--text-small)',
+    color: 'var(--text-secondary)'
   },
   featureCheck: {
-    color: 'var(--secondary-emerald)',
-    fontWeight: 700,
-    fontSize: '1rem'
+    color: '#5458FF',
+    fontWeight: 700
   },
-  ctaBtn: {
+  modelCta: {
     width: '100%',
     marginTop: 'auto'
   },
+  sectorsSection: {
+    padding: 'var(--space-8) 0',
+    background: 'linear-gradient(135deg, rgba(84, 88, 255, 0.03) 0%, rgba(107, 151, 252, 0.05) 100%)'
+  },
+  sectorsGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: 'var(--space-3)',
+    maxWidth: '900px',
+    margin: '0 auto'
+  },
+  sectorCard: {
+    background: 'rgba(255, 255, 255, 0.95)',
+    backdropFilter: 'blur(10px)',
+    borderRadius: 'var(--radius-lg)',
+    padding: 'var(--space-4)',
+    textAlign: 'center',
+    border: '1px solid rgba(107, 151, 252, 0.15)',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease'
+  },
+  sectorIcon: {
+    fontSize: '2.5rem',
+    marginBottom: 'var(--space-2)'
+  },
+  sectorName: {
+    fontSize: 'var(--text-body)',
+    fontWeight: 600,
+    color: 'var(--text-primary)',
+    margin: '0 0 8px 0',
+    fontFamily: 'var(--font-display)'
+  },
+  caseStudyBadge: {
+    display: 'inline-block',
+    fontSize: '10px',
+    fontWeight: 600,
+    padding: '4px 10px',
+    borderRadius: '20px',
+    background: 'linear-gradient(135deg, #5458FF 0%, #6B97FC 100%)',
+    color: 'white'
+  },
+  processSection: {
+    padding: 'var(--space-10) 0',
+    background: 'linear-gradient(135deg, #5458FF 0%, #6B97FC 100%)'
+  },
+  processSteps: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    gap: 'var(--space-4)',
+    maxWidth: '1000px',
+    margin: '0 auto'
+  },
+  processStep: {
+    textAlign: 'center',
+    color: 'white'
+  },
+  stepNumber: {
+    fontSize: 'var(--text-h1)',
+    fontWeight: 800,
+    fontFamily: 'var(--font-display)',
+    opacity: 0.3,
+    marginBottom: 'var(--space-2)'
+  },
+  stepTitle: {
+    fontSize: 'var(--text-h4)',
+    fontWeight: 700,
+    marginBottom: '8px',
+    color: 'white'
+  },
+  stepDesc: {
+    fontSize: 'var(--text-small)',
+    opacity: 0.85,
+    lineHeight: 1.5
+  },
   ctaSection: {
-    background: 'var(--gradient-primary)',
+    background: 'var(--neutral-darkest)',
     padding: 'var(--space-12) 0',
     color: 'white',
     textAlign: 'center'
@@ -321,12 +519,13 @@ const styles = {
   ctaTitle: {
     fontSize: 'var(--text-h1)',
     marginBottom: 'var(--space-3)',
-    color: 'white'
+    color: 'white',
+    fontFamily: 'var(--font-display)'
   },
   ctaText: {
     fontSize: 'var(--text-h4)',
     marginBottom: 'var(--space-4)',
-    opacity: 0.95,
+    opacity: 0.9,
     lineHeight: '1.6'
   },
   ctaButtons: {

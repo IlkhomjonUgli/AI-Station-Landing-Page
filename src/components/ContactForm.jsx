@@ -31,24 +31,24 @@ const ContactForm = () => {
       newErrors.email = 'Invalid email address';
     }
     if (!formData.message.trim()) newErrors.message = 'Message is required';
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validate()) return;
 
     setIsSubmitting(true);
-    
+
     // Simulate API call
     setTimeout(() => {
       setSubmitStatus('success');
       setFormData({ name: '', email: '', phone: '', program: '', message: '' });
       setIsSubmitting(false);
-      
+
       setTimeout(() => setSubmitStatus(null), 5000);
     }, 1500);
   };
@@ -112,12 +112,32 @@ const ContactForm = () => {
             onChange={handleChange}
             className="form-select"
           >
-            <option value="">Select a program</option>
-            <option value="fundamentals">AI Fundamentals</option>
-            <option value="aipreneurs">AIpreneurs</option>
-            <option value="data-science">Data Science</option>
-            <option value="banking">Banking Workshop</option>
-            <option value="corporate">Corporate Training</option>
+            <option value="">Select a program or service</option>
+            <optgroup label="AIS Academy">
+              <option value="ai-practitioners">AI Practitioners (1.5 months)</option>
+              <option value="data-science">Data Science Foundation (3 months)</option>
+              <option value="machine-learning">Machine Learning (3 months)</option>
+              <option value="deep-learning">Deep Learning (3 months)</option>
+              <option value="nlp">NLP (10 months)</option>
+              <option value="computer-vision">Computer Vision (10 months)</option>
+            </optgroup>
+            <optgroup label="Specialized Bootcamps">
+              <option value="ai-fintech">AI with Fintech</option>
+              <option value="ai-medics">AI with Medics</option>
+              <option value="ai-teaching">AI in Teaching</option>
+              <option value="vibe-coding">Vibe Coding A to Z</option>
+              <option value="executive-ai">Executive AI Education</option>
+            </optgroup>
+            <optgroup label="AIS Studio">
+              <option value="aipreneurship">AIpreneurship Program</option>
+              <option value="incubation">Incubation Program</option>
+              <option value="acceleration">Acceleration Program</option>
+            </optgroup>
+            <optgroup label="Corporate Innovation">
+              <option value="hybrid-bootcamp">Hybrid Bootcamp</option>
+              <option value="digital-sprint">Digital Sprint</option>
+              <option value="offline-immersion">Offline Immersion</option>
+            </optgroup>
           </select>
         </div>
       </div>

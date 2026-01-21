@@ -10,6 +10,7 @@ import AllBlogPage from './pages/AllBlogPage';
 import AllNewsPage from './pages/AllNewsPage';
 import Portfolio from './pages/Portfolio';
 import Services from './pages/Services';
+import Programs from './pages/Programs';
 import ScrollToTop from './components/ScrollToTop';
 import LoginPage from './admin/pages/LoginPage';
 import AnalyticsDashboard from './admin/pages/AnalyticsDashboard';
@@ -50,6 +51,7 @@ function AppContent() {
           <Route path="/news" element={<AllNewsPage />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/programs" element={<Programs />} />
 
           {/* Admin login (no sidebar) */}
           <Route path="/admin/login" element={<LoginPage />} />

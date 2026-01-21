@@ -305,11 +305,11 @@ const navStyles = {
     right: 0,
     zIndex: 1000,
     padding: '1.25rem 0',
-    background: 'var(--bg-primary)',
-    backdropFilter: 'none',
+    background: isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
+    backdropFilter: isScrolled ? 'blur(10px)' : 'none',
     boxShadow: 'none',
-    borderBottom: isScrolled ? '1px solid var(--border-color)' : 'none',
-    transition: 'all 0.2s ease'
+    borderBottom: 'none',
+    transition: 'all 0.3s ease'
   }),
   container: {
     display: 'flex',

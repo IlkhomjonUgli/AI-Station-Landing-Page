@@ -22,29 +22,35 @@ const Footer = () => {
 
   const footerLinks = {
     programs: [
-      { label: 'AI Fundamentals', path: '#programs' },
-      { label: 'AIpreneurs', path: '#programs' },
-      { label: 'Data Science', path: '#programs' },
-      { label: 'Banking Workshop', path: '#programs' },
-      { label: 'Corporate Training', path: '#programs' }
+      { label: 'AIS Academy', path: '/programs' },
+      { label: 'AIS Studio', path: '/programs' },
+      { label: 'Corporate Innovation', path: '/services' },
+      { label: 'Global Mentors', path: '/#mentors' }
     ],
     company: [
-      { label: 'About Us', path: '#about' },
-      { label: 'Our Team', path: '#about' },
-      { label: 'Careers', path: '#careers' },
-      { label: 'Contact', path: '#contact' }
+      { label: 'About Us', path: '/#about' },
+      { label: 'Our Vision', path: '/#vision' },
+      { label: 'Case Studies', path: '/#portfolio' },
+      { label: 'Contact', path: '/#contact' }
     ],
     resources: [
-      { label: 'Blog', path: '#resources' },
-      { label: 'News', path: '#resources' },
-      { label: 'FAQ', path: '#contact' },
-      { label: 'Support', path: '#contact' }
+      { label: 'Blog', path: '/blog' },
+      { label: 'News', path: '/news' },
+      { label: 'FAQ', path: '/#contact' },
+      { label: 'Support', path: '/#contact' }
     ],
     legal: [
-      { label: 'Privacy Policy', path: '#contact' },
-      { label: 'Terms of Service', path: '#contact' },
-      { label: 'Cookie Policy', path: '#contact' }
+      { label: 'Privacy Policy', path: '/#contact' },
+      { label: 'Terms of Service', path: '/#contact' },
+      { label: 'Cookie Policy', path: '/#contact' }
     ]
+  };
+
+  const contactInfo = {
+    email: 'info@aistation.uz',
+    phone: '+998 55 512 55 77',
+    website: 'aistation.uz',
+    location: 'Tashkent, Uzbekistan'
   };
 
   return (
@@ -57,7 +63,14 @@ const Footer = () => {
                 AI<span className="gradient-text">Station</span>
               </span>
             </div>
-            <p style={footerStyles.tagline}>{t('footer.tagline')}</p>
+            <p style={footerStyles.tagline}>Central Eurasia's Innovation Hub. Bridging Academia and Industry.</p>
+
+            {/* Contact Info */}
+            <div style={footerStyles.contactInfo}>
+              <a href={`mailto:${contactInfo.email}`} style={footerStyles.contactLink}>📧 {contactInfo.email}</a>
+              <a href={`tel:${contactInfo.phone}`} style={footerStyles.contactLink}>📞 {contactInfo.phone}</a>
+              <span style={footerStyles.contactLink}>📍 {contactInfo.location}</span>
+            </div>
 
             <div style={footerStyles.social}>
               {[
@@ -135,6 +148,11 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Social Proof */}
+        <div style={footerStyles.socialProof}>
+          <span style={footerStyles.socialProofText}>✓ Trusted by Ministry of Justice, Aloqabank, and UNDP</span>
+        </div>
+
         <div style={footerStyles.bottomSection}>
           <div style={footerStyles.legalLinks}>
             {footerLinks.legal.map((link, index) => (
@@ -180,9 +198,32 @@ const footerStyles = {
   },
   tagline: {
     fontSize: 'var(--text-body)',
-    color: '#A3A3A3',  // Gray-400 for readable contrast
+    color: '#A3A3A3',
     maxWidth: '300px',
     lineHeight: 1.6
+  },
+  contactInfo: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '6px',
+    marginTop: 'var(--space-2)'
+  },
+  contactLink: {
+    fontSize: 'var(--text-small)',
+    color: '#A3A3A3',
+    textDecoration: 'none',
+    transition: 'color 0.3s ease'
+  },
+  socialProof: {
+    textAlign: 'center',
+    padding: 'var(--space-4) 0',
+    marginBottom: 'var(--space-4)',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+  },
+  socialProofText: {
+    fontSize: 'var(--text-small)',
+    color: '#6B97FC',
+    fontWeight: 500
   },
   social: {
     display: 'flex',

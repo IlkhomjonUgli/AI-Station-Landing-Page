@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
+import GlobalContext from '../components/GlobalContext';
+import FutureCampus from '../components/FutureCampus';
+import MissionStatement from '../components/MissionStatement';
+import MentorNetwork from '../components/MentorNetwork';
+import CaseStudies from '../components/CaseStudies';
 import StatsCounter from '../components/StatsCounter';
 import ProgramCard from '../components/ProgramCard';
 import ContactForm from '../components/ContactForm';
@@ -102,7 +107,14 @@ const Home = () => {
         <Hero />
       </section>
 
+      {/* NEW: Global Context Section */}
+      <GlobalContext />
 
+      {/* NEW: Future Campus / 5-Floor Vision Section */}
+      <FutureCampus />
+
+      {/* NEW: Mission Statement Section */}
+      <MissionStatement />
 
       {/* Services Section - Only show if there are services */}
       {services.length > 0 && (
@@ -123,7 +135,7 @@ const Home = () => {
             </motion.div>
 
             <div style={styles.servicesGrid}>
-              {services.map((service, index) => (
+              {services.slice(0, 4).map((service, index) => (
                 <motion.div
                   key={service.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -188,114 +200,15 @@ const Home = () => {
         </section>
       )}
 
-      {/* Portfolio Section - Only show if there are portfolio items */}
-      {portfolioProjects.length > 0 && (
-        <section id="portfolio" className="section">
-          <div className="container">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }}
-            >
-              <h2 style={styles.sectionTitle}>
-                {t('sections.portfolio')}
-              </h2>
-              <p style={styles.sectionSubtitle}>
-                {t('sections.portfolioSubtitle')}
-              </p>
-            </motion.div>
 
-            <div style={styles.portfolioGrid}>
-              {portfolioProjects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -8 }}
-                  style={styles.projectCard}
-                >
-                  {project.featured && <div style={styles.featuredBadge}>{t('portfolio.featured')}</div>}
-                  <div style={{ fontSize: '2.5rem', marginBottom: 'var(--space-2)' }}>
-                    {project.image && project.image.startsWith('/') ? (
-                      <img src={project.image} alt={project.title} style={{ width: '48px', height: '48px' }} />
-                    ) : (
-                      project.image
-                    )}
-                  </div>
-                  <h3 style={styles.cardTitle}>{project.title}</h3>
-                  <p style={styles.projectClient}>{project.client}</p>
-                  <p style={styles.cardDescription}>{project.description}</p>
-                  <div style={styles.projectResults}>
-                    <span style={styles.resultsLabel}>{t('portfolio.resultsLabel')}</span>
-                    <span style={styles.resultsValue}>
-                      {Array.isArray(project.results) ? project.results[0] : project.results}
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+      {/* Corporate Success Stories Section */}
+      <CaseStudies />
 
-            {/* View All Button */}
-            <div style={{ textAlign: 'center', marginTop: 'var(--space-4)' }}>
-              <Link to="/portfolio" className="btn btn-secondary" style={{ display: 'inline-block' }}>
-                View All Projects →
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
 
-      {/* About/Team Section - Only show if there are team members */}
-      {teamMembers.length > 0 && (
-        <section id="about" className="section" style={{ background: 'var(--bg-secondary)' }}>
-          <div className="container">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }}
-            >
-              <h2 style={styles.sectionTitle}>
-                {t('sections.team')}
-              </h2>
-              <p style={styles.sectionSubtitle}>
-                {t('sections.teamSubtitle')}
-              </p>
-            </motion.div>
 
-            <div style={styles.teamGrid}>
-              {teamMembers.map((member, index) => (
-                <motion.div
-                  key={member.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  style={styles.teamCard}
-                >
-                  {member.image && (
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      style={styles.teamImage}
-                    />
-                  )}
-                  <h3 style={styles.teamName}>{member.name}</h3>
-                  <p style={styles.teamRole}>{member.role}</p>
-                  {member.bio && (
-                    <p style={styles.teamExpertise}>
-                      {member.bio.length > 100 ? member.bio.substring(0, 100) + '...' : member.bio}
-                    </p>
-                  )}
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      {/* Global Mentor Network Section */}
+      <MentorNetwork />
+
 
       {/* Resources Section */}
       <section id="resources" className="section">
@@ -523,7 +436,7 @@ const styles = {
   },
   servicesGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+    gridTemplateColumns: 'repeat(4, 1fr)',
     gap: 'var(--space-4)'
   },
   serviceCard: {
