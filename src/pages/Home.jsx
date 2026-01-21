@@ -167,40 +167,45 @@ const Home = () => {
         </section>
       )}
 
-      {/* Programs Section - Only show if there are programs */}
-      {programs.length > 0 && (
-        <section id="programs" className="section" style={{ background: 'var(--bg-secondary)' }}>
-          <div className="container">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }}
-            >
-              <h2 style={styles.sectionTitle}>
-                {t('sections.programs')}
-              </h2>
-              <p style={styles.sectionSubtitle}>
-                {t('sections.programsSubtitle')}
-              </p>
-            </motion.div>
+      {/* Programs Section */}
+      <section id="programs" className="section" style={{ background: 'var(--bg-secondary)' }}>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }}
+          >
+            <h2 style={styles.sectionTitle}>
+              {t('sections.programs')}
+            </h2>
+            <p style={styles.sectionSubtitle}>
+              {t('sections.programsSubtitle')}
+            </p>
+          </motion.div>
 
-            <div style={styles.programsGrid}>
-              {programs.map((program, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <ProgramCard program={program} index={index} />
-                </motion.div>
-              ))}
-            </div>
+          <div style={styles.programsGrid}>
+            {programs.slice(0, 3).map((program, index) => (
+              <motion.div
+                key={program.id || index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <ProgramCard program={program} index={index} />
+              </motion.div>
+            ))}
           </div>
-        </section>
-      )}
+
+          {/* View All Programs Button */}
+          <div style={{ textAlign: 'center', marginTop: 'var(--space-4)' }}>
+            <Link to="/programs" className="btn btn-secondary" style={{ display: 'inline-block' }}>
+              View All Programs →
+            </Link>
+          </div>
+        </div>
+      </section>
 
 
       {/* Corporate Success Stories Section */}
