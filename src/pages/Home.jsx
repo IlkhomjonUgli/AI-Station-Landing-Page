@@ -111,7 +111,8 @@ const Home = () => {
       <GlobalContext />
 
       {/* NEW: Future Campus / 5-Floor Vision Section */}
-      <FutureCampus />
+      {/* FutureCampus section hidden for now */}
+      {/* <FutureCampus /> */}
 
       {/* NEW: Mission Statement Section */}
       <MissionStatement />

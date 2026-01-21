@@ -135,11 +135,7 @@ body {
   font-size: var(--text-body);
   line-height: 1.6;
   color: var(--text-primary);
-  background-image: url('/hero-background.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: var(--bg-primary);
   overflow-x: hidden;
   transition: background-color var(--transition-base), color var(--transition-base);
 }
