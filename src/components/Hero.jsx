@@ -161,10 +161,11 @@ const heroStyles = {
   },
   stats: {
     display: 'flex',
-    gap: 'var(--space-8)',
+    gap: 'var(--space-6)',
     paddingTop: 'var(--space-4)',
     borderTop: '1px solid rgba(107, 151, 252, 0.2)',
-    flexWrap: 'wrap'
+    justifyContent: 'space-between',
+    maxWidth: '800px'
   },
   statItem: {
     display: 'flex',
