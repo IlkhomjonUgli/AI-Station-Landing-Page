@@ -7,6 +7,20 @@ const Programs = () => {
   // AIS Academy - Professional Tracks
   const professionalTracks = [
     {
+      title: 'Design Thinking with AI',
+      duration: '1 month',
+      level: 'Foundational',
+      description: 'Identifying user problems and validating ideas before building.',
+      icon: '💡'
+    },
+    {
+      title: 'AI for Students',
+      duration: '1 month',
+      level: 'Foundational',
+      description: 'Mastering existing AI tools for academic and personal productivity.',
+      icon: '🎒'
+    },
+    {
       title: 'AI Practitioners',
       duration: '1.5 months',
       level: 'Foundations',

@@ -2,6 +2,34 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const MentorNetwork = () => {
+    // Leadership Team
+    const leadershipTeam = [
+        {
+            name: 'Tulkin Chulliev',
+            role: 'CEO',
+            bio: '12+ years experience in International Economics. Specialized in Higher Education Institutions and NGOs.',
+            initials: 'TC'
+        },
+        {
+            name: 'Isomiddin Abdunabiev',
+            role: 'CTO',
+            bio: '8+ years experience in Distributed & Cloud Computing. Expert in Government & International Org tech infrastructure.',
+            initials: 'IA'
+        },
+        {
+            name: 'Mukhammadali Salokhiddinov',
+            role: 'CPO',
+            bio: '4+ years experience. Specializes in transforming Government and Startup ecosystems.',
+            initials: 'MS'
+        },
+        {
+            name: 'Khadicha Abdurashidova',
+            role: 'Program Manager',
+            bio: '3+ years experience in Finance Management and Education centers.',
+            initials: 'KA'
+        }
+    ];
+
     const internationalMentors = [
         {
             name: 'Javokhir Jurakhodjaev',
@@ -78,6 +106,27 @@ const MentorNetwork = () => {
         }
     ];
 
+    // Leadership Card Component
+    const LeaderCard = ({ leader, index }) => (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1, duration: 0.4 }}
+            whileHover={{ y: -8, scale: 1.02 }}
+            style={styles.leaderCard}
+        >
+            <div style={styles.leaderAvatar}>
+                <span style={styles.initials}>{leader.initials}</span>
+            </div>
+            <div style={styles.leaderInfo}>
+                <h3 style={styles.leaderName}>{leader.name}</h3>
+                <span style={styles.leaderRole}>{leader.role}</span>
+                <p style={styles.leaderBio}>{leader.bio}</p>
+            </div>
+        </motion.div>
+    );
+
     const MentorCard = ({ mentor, index, isInternational }) => (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -111,12 +160,32 @@ const MentorNetwork = () => {
     return (
         <section id="mentors" style={styles.section}>
             <div className="container">
-                {/* Section Header */}
+                {/* Leadership Team Section */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     style={styles.header}
+                >
+                    <span style={styles.kicker}>WHO WE ARE</span>
+                    <h2 style={styles.title}>Leadership Team</h2>
+                    <p style={styles.subtitle}>
+                        The visionaries driving AI Station's mission forward
+                    </p>
+                </motion.div>
+
+                <div style={styles.leadershipGrid}>
+                    {leadershipTeam.map((leader, index) => (
+                        <LeaderCard key={leader.name} leader={leader} index={index} />
+                    ))}
+                </div>
+
+                {/* Global Mentor Network Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    style={{ ...styles.header, marginTop: 'var(--space-12)' }}
                 >
                     <span style={styles.kicker}>OUR NETWORK</span>
                     <h2 style={styles.title}>Global Mentor Network</h2>
@@ -187,6 +256,61 @@ const styles = {
     section: {
         padding: 'var(--space-12) 0',
         position: 'relative'
+    },
+    leadershipGrid: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, 1fr)',
+        gap: 'var(--space-4)',
+        marginBottom: 'var(--space-6)'
+    },
+    leaderCard: {
+        background: 'linear-gradient(135deg, rgba(84, 88, 255, 0.05) 0%, rgba(107, 151, 252, 0.08) 100%)',
+        backdropFilter: 'blur(10px)',
+        borderRadius: 'var(--radius-lg)',
+        padding: 'var(--space-4)',
+        border: '2px solid rgba(84, 88, 255, 0.2)',
+        textAlign: 'center',
+        cursor: 'default',
+        transition: 'all 0.3s ease'
+    },
+    leaderAvatar: {
+        width: '90px',
+        height: '90px',
+        borderRadius: '50%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: '0 auto var(--space-3)',
+        background: 'linear-gradient(135deg, #5458FF 0%, #6B97FC 100%)',
+        boxShadow: '0 4px 20px rgba(84, 88, 255, 0.3)'
+    },
+    leaderInfo: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '4px'
+    },
+    leaderName: {
+        fontSize: 'var(--text-h4)',
+        fontWeight: 700,
+        color: 'var(--text-primary)',
+        margin: 0,
+        fontFamily: 'var(--font-display)'
+    },
+    leaderRole: {
+        display: 'inline-block',
+        fontSize: 'var(--text-small)',
+        fontWeight: 700,
+        color: '#5458FF',
+        background: 'rgba(84, 88, 255, 0.1)',
+        padding: '4px 12px',
+        borderRadius: '20px',
+        margin: '8px auto'
+    },
+    leaderBio: {
+        fontSize: 'var(--text-tiny)',
+        color: 'var(--text-secondary)',
+        lineHeight: 1.5,
+        margin: 0
     },
     header: {
         textAlign: 'center',
