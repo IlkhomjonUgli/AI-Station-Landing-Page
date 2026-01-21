@@ -77,16 +77,20 @@ const Hero = () => {
             style={heroStyles.stats}
           >
             <div style={heroStyles.statItem}>
-              <div style={heroStyles.statNumber}>300+</div>
-              <div style={heroStyles.statLabel}>Community Members</div>
+              <div style={heroStyles.statNumber}>10+</div>
+              <div style={heroStyles.statLabel}>Startups Incubated</div>
             </div>
             <div style={heroStyles.statItem}>
-              <div style={heroStyles.statNumber}>50+</div>
-              <div style={heroStyles.statLabel}>AI Projects</div>
+              <div style={heroStyles.statNumber}>250+</div>
+              <div style={heroStyles.statLabel}>Hours of Innovation</div>
             </div>
             <div style={heroStyles.statItem}>
               <div style={heroStyles.statNumber}>15+</div>
-              <div style={heroStyles.statLabel}>Corporate Partners</div>
+              <div style={heroStyles.statLabel}>Global Mentors</div>
+            </div>
+            <div style={heroStyles.statItem}>
+              <div style={heroStyles.statNumber}>3</div>
+              <div style={heroStyles.statLabel}>Major Corporate Partners</div>
             </div>
           </motion.div>
         </motion.div>
