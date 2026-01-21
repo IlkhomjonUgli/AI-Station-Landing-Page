@@ -52,12 +52,7 @@ const Home = () => {
           setTeamMembers(shuffled);
         }
 
-        // Fetch programs
-        const programsResponse = await fetch(buildURL(API_ENDPOINTS.programs));
-        const programsData = await programsResponse.json();
-        if (programsData.success) {
-          setPrograms(programsData.data.programs);
-        }
+        // Programs are now hardcoded as AIS Academy courses (no API fetch needed)
 
         // Fetch services
         const servicesResponse = await fetch(buildURL(API_ENDPOINTS.services));
@@ -80,9 +75,57 @@ const Home = () => {
     fetchPosts();
   }, []);
 
-  // Programs Data - from translations
-  // Programs Data - fetched from API
-  const [programs, setPrograms] = useState([]);
+  // AIS Academy Programs (hardcoded to match Programs.jsx)
+  const programs = [
+    {
+      id: 1,
+      title: 'Design Thinking with AI',
+      duration: '1 month',
+      level: 'Foundational',
+      description: 'Identifying user problems and validating ideas before building.',
+      icon: '💡'
+    },
+    {
+      id: 2,
+      title: 'AI for Students',
+      duration: '1 month',
+      level: 'Foundational',
+      description: 'Mastering existing AI tools for academic and personal productivity.',
+      icon: '🎒'
+    },
+    {
+      id: 3,
+      title: 'AI Practitioners',
+      duration: '1.5 months',
+      level: 'Foundations',
+      description: 'Master the basics of artificial intelligence and practical applications.',
+      icon: '🤖'
+    },
+    {
+      id: 4,
+      title: 'Data Science Foundation',
+      duration: '3 months',
+      level: 'Analytics & Cleaning',
+      description: 'Deep dive into data analysis, cleaning, and visualization techniques.',
+      icon: '📊'
+    },
+    {
+      id: 5,
+      title: 'Machine Learning',
+      duration: '3 months',
+      level: 'Regression, Classification',
+      description: 'Build and deploy ML models for real-world applications.',
+      icon: '🧠'
+    },
+    {
+      id: 6,
+      title: 'Deep Learning',
+      duration: '3 months',
+      level: 'Neural Networks, GenAI',
+      description: 'Master neural architectures and generative AI technologies.',
+      icon: '⚡'
+    }
+  ];
 
   // Services Data - fetched from API
   const [services, setServices] = useState([]);
