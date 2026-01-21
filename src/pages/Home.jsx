@@ -286,7 +286,8 @@ const Home = () => {
       <MentorNetwork />
 
 
-      {/* Resources Section */}
+      {/* Resources Section - Hidden for now (materials not ready) */}
+      {/*
       <section id="resources" className="section">
         <div className="container">
           <motion.div
@@ -330,6 +331,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      */}
 
       {/* Blog Section - Only show if there are blog posts */}
       {blogPosts.length > 0 && (
