@@ -482,25 +482,7 @@ const Home = () => {
       {/* Innovation Atmosphere Gallery */}
       <InnovationGallery />
 
-      {/* CTA Section */}
-      <section style={styles.ctaSection}>
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            style={{ textAlign: 'center' }}
-          >
-            <h2 style={styles.ctaTitle}>{t('cta.title')}</h2>
-            <p style={styles.ctaText}>
-              {t('cta.subtitle')}
-            </p>
-            <a href="#contact" className="btn btn-primary" style={{ fontSize: '1.2rem', padding: '16px 48px' }}>
-              {t('cta.getStarted')}
-            </a>
-          </motion.div>
-        </div>
-      </section>
+      {/* CTA Section - Merged into Footer */}
     </div>
   );
 };

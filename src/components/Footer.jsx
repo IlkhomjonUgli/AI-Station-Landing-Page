@@ -55,6 +55,27 @@ const Footer = () => {
 
   return (
     <footer style={footerStyles.footer}>
+      {/* CTA Section - Merged into Footer */}
+      <div style={footerStyles.ctaSection}>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={{ textAlign: 'center' }}
+          >
+            <h2 style={footerStyles.ctaTitle}>Ready to Join Uzbekistan's AI Revolution?</h2>
+            <p style={footerStyles.ctaText}>
+              Connect with Uzbekistan's leading AI community – learn, build, and innovate with us
+            </p>
+            <Link to="/#contact" className="btn btn-primary" style={{ fontSize: '1.1rem', padding: '14px 40px' }}>
+              Get Started Today
+            </Link>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Main Footer Content */}
       <div className="container">
         <div style={footerStyles.topSection}>
           <div style={footerStyles.brand}>
@@ -175,16 +196,36 @@ const Footer = () => {
 
 const footerStyles = {
   footer: {
-    background: '#000000',  // Pure black for Wolf Pack aesthetic
+    background: '#000000',
     color: '#FFFFFF',
-    padding: 'var(--space-12) 0 var(--space-6)',
     marginTop: 'auto'
+  },
+  ctaSection: {
+    background: '#000000',
+    padding: 'var(--space-12) 0',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+  },
+  ctaTitle: {
+    fontSize: 'var(--text-h1)',
+    fontWeight: 800,
+    marginBottom: 'var(--space-3)',
+    color: '#FFFFFF',
+    fontFamily: 'var(--font-display)'
+  },
+  ctaText: {
+    fontSize: 'var(--text-h4)',
+    marginBottom: 'var(--space-4)',
+    color: 'rgba(255, 255, 255, 0.8)',
+    maxWidth: '600px',
+    margin: '0 auto var(--space-4)',
+    lineHeight: 1.6
   },
   topSection: {
     display: 'grid',
     gridTemplateColumns: '1.5fr 2.5fr',
     gap: 'var(--space-8)',
     marginBottom: 'var(--space-8)',
+    paddingTop: 'var(--space-8)',
     paddingBottom: 'var(--space-8)',
     borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
   },
