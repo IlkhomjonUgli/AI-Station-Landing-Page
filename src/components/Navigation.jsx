@@ -75,18 +75,17 @@ const Navigation = () => {
     setIsMobileMenuOpen(false);
   }, [location]);
 
-  // Build dynamic nav links - only show if content exists
+  // Build nav links - hardcoded to match current site structure
   const allNavLinks = [
-    { path: '#home', label: t('nav.home'), section: 'home', show: true },
-    { path: '#services', label: t('nav.services'), section: 'services', show: contentExists.services },
-    { path: '#programs', label: t('nav.programs'), section: 'programs', show: contentExists.programs },
-    { path: '#portfolio', label: t('nav.portfolio'), section: 'portfolio', show: true },
-    { path: '#about', label: t('nav.about'), section: 'about', show: contentExists.about },
+    { path: '#home', label: 'Home', section: 'home', show: true },
+    { path: '/services', label: 'Services', section: 'services', show: true, external: true },
+    { path: '/programs', label: 'Programs', section: 'programs', show: true, external: true },
+    { path: '#portfolio', label: 'AI Portfolio', section: 'portfolio', show: true },
+    { path: '#mentors', label: 'Mentors', section: 'mentors', show: true },
     { path: '/blog', label: 'Blog', section: 'blog', show: contentExists.blog, external: true },
-    { path: '/news', label: 'News', section: 'news', show: contentExists.news, external: true },
-    { path: '#resources', label: t('nav.resources'), section: 'resources', show: true },
-    { path: '#careers', label: t('nav.careers'), section: 'careers', show: true },
-    { path: '#contact', label: t('nav.contact'), section: 'contact', show: true }
+    // { path: '#resources', label: 'Resources', section: 'resources', show: false },
+    // { path: '#careers', label: 'Careers', section: 'careers', show: false },
+    { path: '#contact', label: 'Contact', section: 'contact', show: true }
   ];
 
   const navLinks = allNavLinks.filter(link => link.show);
