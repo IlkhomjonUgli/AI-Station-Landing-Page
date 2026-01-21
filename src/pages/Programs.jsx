@@ -85,6 +85,12 @@ const Programs = () => {
       icon: '🎓'
     },
     {
+      title: 'AI in Professional Content Creation',
+      target: 'Creatives and Marketers',
+      description: 'Video generation, editing, and media synthesis using AI tools.',
+      icon: '🎬'
+    },
+    {
       title: 'Vibe Coding A to Z',
       target: 'Modern Rapid Development',
       description: 'Master AI-assisted development for rapid prototyping.',

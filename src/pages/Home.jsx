@@ -7,6 +7,7 @@ import FutureCampus from '../components/FutureCampus';
 import MissionStatement from '../components/MissionStatement';
 import MentorNetwork from '../components/MentorNetwork';
 import CaseStudies from '../components/CaseStudies';
+import InnovationGallery from '../components/InnovationGallery';
 import StatsCounter from '../components/StatsCounter';
 import ProgramCard from '../components/ProgramCard';
 import ContactForm from '../components/ContactForm';
@@ -399,6 +400,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Innovation Atmosphere Gallery */}
+      <InnovationGallery />
 
       {/* CTA Section */}
       <section style={styles.ctaSection}>
