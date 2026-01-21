@@ -54,12 +54,7 @@ const Home = () => {
 
         // Programs are now hardcoded as AIS Academy courses (no API fetch needed)
 
-        // Fetch services
-        const servicesResponse = await fetch(buildURL(API_ENDPOINTS.services));
-        const servicesData = await servicesResponse.json();
-        if (servicesData.success) {
-          setServices(servicesData.data.services);
-        }
+        // Services are now hardcoded as Engagement Models (no API fetch needed)
 
         // Fetch portfolio projects
         const portfolioResponse = await fetch(buildURL(API_ENDPOINTS.portfolio));
@@ -127,8 +122,36 @@ const Home = () => {
     }
   ];
 
-  // Services Data - fetched from API
-  const [services, setServices] = useState([]);
+  // Industry Innovation Tracks - Engagement Models (hardcoded to match Services.jsx)
+  const services = [
+    {
+      id: 'hybrid',
+      title: 'The Hybrid Bootcamp',
+      duration: '3-4 Weeks',
+      description: 'Intensive training combining online workshops with offline sessions and a final Demo Day.',
+      bestFor: 'Government & Large Enterprises',
+      icon: '🔄',
+      popular: true
+    },
+    {
+      id: 'digital',
+      title: 'The Digital Sprint',
+      duration: '3-4 Weeks',
+      description: 'Fully remote online training with virtual workshops and digital Demo Day.',
+      bestFor: 'Remote teams & International partners',
+      icon: '🌐',
+      popular: false
+    },
+    {
+      id: 'offline',
+      title: 'The Offline Immersion',
+      duration: '3-4 Weeks',
+      description: 'Hands-on offline training at our Hub with direct mentorship and supervision.',
+      bestFor: 'Technical teams requiring deep-dive',
+      icon: '🏢',
+      popular: false
+    }
+  ];
 
   // Job Positions - from translations
   const jobs = [
@@ -161,54 +184,57 @@ const Home = () => {
       {/* NEW: Mission Statement Section */}
       <MissionStatement />
 
-      {/* Services Section - Only show if there are services */}
-      {services.length > 0 && (
-        <section id="services" className="section">
-          <div className="container">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }}
-            >
-              <h2 style={styles.sectionTitle}>
-                {t('sections.services')}
-              </h2>
-              <p style={styles.sectionSubtitle}>
-                {t('sections.servicesSubtitle')}
-              </p>
-            </motion.div>
+      {/* Services Section - Engagement Models */}
+      <section id="services" className="section">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }}
+          >
+            <h2 style={styles.sectionTitle}>
+              Industry Innovation Tracks
+            </h2>
+            <p style={styles.sectionSubtitle}>
+              Choose your engagement model for AI transformation
+            </p>
+          </motion.div>
 
-            <div style={styles.servicesGrid}>
-              {services.slice(0, 4).map((service, index) => (
-                <motion.div
-                  key={service.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -8 }}
-                  style={styles.serviceCard}
-                >
-                  {service.popular && <div style={styles.popularBadge}>{t('services.popular')}</div>}
-                  <h3 style={styles.cardTitle}>{service.title}</h3>
-                  <p style={styles.cardDescription}>{service.description}</p>
-                  <Link to="/services" className="btn btn-primary" style={{ width: '100%', marginTop: 'auto' }}>
-                    {t('services.learnMore')}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* View All Button */}
-            <div style={{ textAlign: 'center', marginTop: 'var(--space-4)' }}>
-              <Link to="/services" className="btn btn-secondary" style={{ display: 'inline-block' }}>
-                View All Services →
-              </Link>
-            </div>
+          <div style={{ ...styles.servicesGrid, gridTemplateColumns: 'repeat(3, 1fr)' }}>
+            {services.map((service, index) => (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -8 }}
+                style={styles.serviceCard}
+              >
+                {service.popular && <div style={styles.popularBadge}>RECOMMENDED</div>}
+                <div style={{ fontSize: '2.5rem', marginBottom: 'var(--space-2)' }}>{service.icon}</div>
+                <h3 style={styles.cardTitle}>{service.title}</h3>
+                <p style={{ fontSize: 'var(--text-small)', color: 'var(--primary-spectrum)', fontWeight: 600, marginBottom: 'var(--space-2)' }}>{service.duration}</p>
+                <p style={styles.cardDescription}>{service.description}</p>
+                <p style={{ fontSize: 'var(--text-tiny)', color: 'var(--text-secondary)', marginBottom: 'var(--space-3)' }}>
+                  <strong>Best For:</strong> {service.bestFor}
+                </p>
+                <Link to="/services" className="btn btn-primary" style={{ width: '100%', marginTop: 'auto' }}>
+                  Request Proposal
+                </Link>
+              </motion.div>
+            ))}
           </div>
-        </section>
-      )}
+
+          {/* View All Services Button */}
+          <div style={{ textAlign: 'center', marginTop: 'var(--space-4)' }}>
+            <Link to="/services" className="btn btn-secondary" style={{ display: 'inline-block' }}>
+              View All Sectors & Formats →
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Programs Section */}
       <section id="programs" className="section" style={{ background: 'var(--bg-secondary)' }}>
