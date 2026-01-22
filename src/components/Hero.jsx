@@ -2,8 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { fadeInUp } from '../utils/helpers';
+import { useLanguage } from '../utils/contexts';
 
 const Hero = () => {
+  const { t } = useLanguage();
+
   return (
     <section style={heroStyles.section}>
       {/* Overlay removed - background handled by body */}
@@ -22,7 +25,7 @@ const Hero = () => {
             transition={{ delay: 0.1, duration: 0.4 }}
             style={heroStyles.kicker}
           >
-            CENTRAL EURASIA'S INNOVATION HUB
+            {t('hero.kicker')}
           </motion.span>
 
           <motion.h1
@@ -30,7 +33,7 @@ const Hero = () => {
             style={heroStyles.title}
             variants={fadeInUp}
           >
-            {'Next Stop: Innovation'.split(' ').map((word, i) => (
+            {t('hero.title').split(' ').map((word, i) => (
               <motion.span
                 key={i}
                 style={{ display: 'inline-block', marginRight: '0.3em' }}
@@ -49,8 +52,7 @@ const Hero = () => {
             transition={{ delay: 0.5, duration: 0.5 }}
             style={heroStyles.subtitle}
           >
-            We are the bridge between academia and industry, co-creating AI solutions
-            with corporations and developing the next generation of AI entrepreneurs.
+            {t('hero.subtitle')}
           </motion.p>
 
           <motion.div
@@ -59,15 +61,15 @@ const Hero = () => {
             transition={{ delay: 0.7, duration: 0.5 }}
             style={heroStyles.ctaButtons}
           >
-            <Link to="/programs" className="btn btn-primary">
-              <span>Join the Ecosystem</span>
+            <a href="#programs" className="btn btn-primary">
+              <span>{t('hero.getStarted')}</span>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </Link>
-            <Link to="/about" className="btn btn-secondary">
-              Explore Our Vision
-            </Link>
+            </a>
+            <a href="#services" className="btn btn-secondary">
+              {t('hero.learnMore')}
+            </a>
           </motion.div>
 
           <motion.div
@@ -78,19 +80,19 @@ const Hero = () => {
           >
             <div style={heroStyles.statItem}>
               <div style={heroStyles.statNumber}>10+</div>
-              <div style={heroStyles.statLabel}>Startups Incubated</div>
+              <div style={heroStyles.statLabel}>{t('hero.startupsIncubated')}</div>
             </div>
             <div style={heroStyles.statItem}>
               <div style={heroStyles.statNumber}>250+</div>
-              <div style={heroStyles.statLabel}>Hours of Innovation</div>
+              <div style={heroStyles.statLabel}>{t('hero.hoursInnovation')}</div>
             </div>
             <div style={heroStyles.statItem}>
               <div style={heroStyles.statNumber}>15+</div>
-              <div style={heroStyles.statLabel}>Global Mentors</div>
+              <div style={heroStyles.statLabel}>{t('hero.globalMentors')}</div>
             </div>
             <div style={heroStyles.statItem}>
               <div style={heroStyles.statNumber}>3</div>
-              <div style={heroStyles.statLabel}>Major Corporate Partners</div>
+              <div style={heroStyles.statLabel}>{t('hero.corporatePartners')}</div>
             </div>
           </motion.div>
         </motion.div>
