@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../utils/contexts';
 
 const MentorNetwork = () => {
+    const { t, language } = useLanguage();
     // Leadership Team
     const leadershipTeam = [
         {
@@ -167,10 +169,10 @@ const MentorNetwork = () => {
                     viewport={{ once: true }}
                     style={styles.header}
                 >
-                    <span style={styles.kicker}>WHO WE ARE</span>
-                    <h2 style={styles.title}>Leadership Team</h2>
+                    <span style={styles.kicker}>{t('mentorNetwork.leadershipKicker')}</span>
+                    <h2 style={styles.title}>{t('mentorNetwork.leadershipTitle')}</h2>
                     <p style={styles.subtitle}>
-                        The visionaries driving AI Station's mission forward
+                        {t('mentorNetwork.leadershipSubtitle')}
                     </p>
                 </motion.div>
 
@@ -187,10 +189,10 @@ const MentorNetwork = () => {
                     viewport={{ once: true }}
                     style={{ ...styles.header, marginTop: 'var(--space-12)' }}
                 >
-                    <span style={styles.kicker}>OUR NETWORK</span>
-                    <h2 style={styles.title}>Global Mentor Network</h2>
+                    <span style={styles.kicker}>{t('mentorNetwork.networkKicker')}</span>
+                    <h2 style={styles.title}>{t('mentorNetwork.title')}</h2>
                     <p style={styles.subtitle}>
-                        Learn from industry leaders who've built AI solutions at the world's top companies
+                        {t('mentorNetwork.subtitle')}
                     </p>
                 </motion.div>
 
@@ -204,8 +206,8 @@ const MentorNetwork = () => {
                     >
                         <div style={styles.subsectionIcon}>🌍</div>
                         <div>
-                            <h3 style={styles.subsectionTitle}>International Mentors</h3>
-                            <p style={styles.subsectionSubtitle}>Global expertise from Fortune 500 & Big Tech</p>
+                            <h3 style={styles.subsectionTitle}>{t('mentorNetwork.internationalTitle')}</h3>
+                            <p style={styles.subsectionSubtitle}>{t('mentorNetwork.internationalSubtitle')}</p>
                         </div>
                     </motion.div>
 
@@ -231,8 +233,8 @@ const MentorNetwork = () => {
                     >
                         <div style={styles.subsectionIcon}>🏛️</div>
                         <div>
-                            <h3 style={styles.subsectionTitle}>Regional Industry Leaders</h3>
-                            <p style={styles.subsectionSubtitle}>Driving innovation across Central Eurasia</p>
+                            <h3 style={styles.subsectionTitle}>{t('mentorNetwork.regionalTitle')}</h3>
+                            <p style={styles.subsectionSubtitle}>{t('mentorNetwork.regionalSubtitle')}</p>
                         </div>
                     </motion.div>
 

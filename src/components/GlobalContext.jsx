@@ -1,7 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../utils/contexts';
 
 const GlobalContext = () => {
+    const { t, language } = useLanguage();
+
     return (
         <section style={styles.section}>
             <div className="container">
@@ -14,22 +17,19 @@ const GlobalContext = () => {
                         transition={{ duration: 0.6 }}
                         style={styles.textContent}
                     >
-                        <span style={styles.kicker}>GLOBAL TREND</span>
-                        <h2 style={styles.heading}>The Race to Become an AI Hub</h2>
+                        <span style={styles.kicker}>{t('globalContext.kicker')}</span>
+                        <h2 style={styles.heading}>{t('globalContext.title')}</h2>
                         <p style={styles.body}>
-                            Nations like France (Station F) serve as global examples of how ecosystems
-                            empower innovation. AI Station is Central Eurasia's answer to this global
-                            trend—a centralized platform to attract regional talent, international partners,
-                            and corporate leaders to build the AI economy of tomorrow.
+                            {t('globalContext.description')}
                         </p>
                         <div style={styles.stats}>
                             <div style={styles.statItem}>
                                 <span style={styles.statNumber}>$2.5T</span>
-                                <span style={styles.statLabel}>Global AI Market by 2030</span>
+                                <span style={styles.statLabel}>{t('globalContext.marketSize')}</span>
                             </div>
                             <div style={styles.statItem}>
                                 <span style={styles.statNumber}>35%</span>
-                                <span style={styles.statLabel}>Annual Growth Rate</span>
+                                <span style={styles.statLabel}>{t('globalContext.growthRate')}</span>
                             </div>
                         </div>
                     </motion.div>
@@ -68,7 +68,7 @@ const GlobalContext = () => {
                             </div>
                             <div style={styles.mapLabel}>
                                 <span style={styles.mapLabelIcon}>🌍</span>
-                                <span>Global Innovation Ecosystem</span>
+                                <span>{t('globalContext.mapLabel')}</span>
                             </div>
                         </div>
                     </motion.div>

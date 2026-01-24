@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { validateEmail } from '../utils/helpers';
+import { useLanguage } from '../utils/contexts';
 
 const ContactForm = () => {
+  const { t, language } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,13 +26,13 @@ const ContactForm = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.name.trim()) newErrors.name = t('contactForm.nameRequired');
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = t('contactForm.emailRequired');
     } else if (!validateEmail(formData.email)) {
-      newErrors.email = 'Invalid email address';
+      newErrors.email = t('contactForm.invalidEmail');
     }
-    if (!formData.message.trim()) newErrors.message = 'Message is required';
+    if (!formData.message.trim()) newErrors.message = t('contactForm.messageRequired');
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -63,7 +65,7 @@ const ContactForm = () => {
     >
       <div style={formStyles.grid}>
         <div className="form-group">
-          <label htmlFor="name" className="form-label">Full Name *</label>
+          <label htmlFor="name" className="form-label">{t('contactForm.nameLabel')}</label>
           <input
             type="text"
             id="name"
@@ -71,13 +73,13 @@ const ContactForm = () => {
             value={formData.name}
             onChange={handleChange}
             className="form-input"
-            placeholder="John Doe"
+            placeholder={t('contactForm.namePlaceholder')}
           />
           {errors.name && <p className="form-error">{errors.name}</p>}
         </div>
 
         <div className="form-group">
-          <label htmlFor="email" className="form-label">Email Address *</label>
+          <label htmlFor="email" className="form-label">{t('contactForm.emailLabel')}</label>
           <input
             type="email"
             id="email"
@@ -85,13 +87,13 @@ const ContactForm = () => {
             value={formData.email}
             onChange={handleChange}
             className="form-input"
-            placeholder="john@example.com"
+            placeholder={t('contactForm.emailPlaceholder')}
           />
           {errors.email && <p className="form-error">{errors.email}</p>}
         </div>
 
         <div className="form-group">
-          <label htmlFor="phone" className="form-label">Phone Number</label>
+          <label htmlFor="phone" className="form-label">{t('contactForm.phoneLabel')}</label>
           <input
             type="tel"
             id="phone"
@@ -99,12 +101,12 @@ const ContactForm = () => {
             value={formData.phone}
             onChange={handleChange}
             className="form-input"
-            placeholder="+998 90 123 45 67"
+            placeholder={t('contactForm.phonePlaceholder')}
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="program" className="form-label">Program of Interest</label>
+          <label htmlFor="program" className="form-label">{t('contactForm.programLabel')}</label>
           <select
             id="program"
             name="program"
@@ -112,7 +114,7 @@ const ContactForm = () => {
             onChange={handleChange}
             className="form-select"
           >
-            <option value="">Select a program or service</option>
+            <option value="">{t('contactForm.programPlaceholder')}</option>
             <optgroup label="AIS Academy">
               <option value="ai-practitioners">AI Practitioners (1.5 months)</option>
               <option value="data-science">Data Science Foundation (3 months)</option>
@@ -143,14 +145,14 @@ const ContactForm = () => {
       </div>
 
       <div className="form-group">
-        <label htmlFor="message" className="form-label">Message *</label>
+        <label htmlFor="message" className="form-label">{t('contactForm.messageLabel')}</label>
         <textarea
           id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
           className="form-textarea"
-          placeholder="Tell us about your goals and how we can help you..."
+          placeholder={t('contactForm.messagePlaceholder')}
           rows="5"
         ></textarea>
         {errors.message && <p className="form-error">{errors.message}</p>}
@@ -165,10 +167,10 @@ const ContactForm = () => {
         {isSubmitting ? (
           <span style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center' }}>
             <span className="loading"></span>
-            Sending...
+            {t('contactForm.sending')}
           </span>
         ) : (
-          'Send Message'
+          t('contactForm.sendMessage')
         )}
       </button>
 
@@ -178,7 +180,7 @@ const ContactForm = () => {
           animate={{ opacity: 1, y: 0 }}
           style={formStyles.successMessage}
         >
-          ✅ Thank you for your message! We'll get back to you soon.
+          {t('contactForm.successMessage')}
         </motion.div>
       )}
     </motion.form>

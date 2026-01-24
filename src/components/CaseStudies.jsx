@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../utils/contexts';
 
 const CaseStudies = () => {
+    const { t, language } = useLanguage();
     const caseStudies = [
         {
             id: 'ministry-of-justice',
@@ -69,10 +71,10 @@ const CaseStudies = () => {
                     viewport={{ once: true }}
                     style={styles.header}
                 >
-                    <span style={styles.kicker}>PROVEN IMPACT</span>
-                    <h2 style={styles.title}>Corporate Success Stories</h2>
+                    <span style={styles.kicker}>{t('caseStudies.kicker')}</span>
+                    <h2 style={styles.title}>{t('caseStudies.title')}</h2>
                     <p style={styles.subtitle}>
-                        Real transformations with measurable results for government and enterprise clients
+                        {t('caseStudies.subtitle')}
                     </p>
                 </motion.div>
 
@@ -108,11 +110,11 @@ const CaseStudies = () => {
                             {/* Challenge & Solution */}
                             <div style={styles.challengeSection}>
                                 <div style={styles.csBlock}>
-                                    <span style={styles.csLabel}>Challenge:</span>
+                                    <span style={styles.csLabel}>{t('caseStudies.challenge')}</span>
                                     <p style={styles.csText}>{study.challenge}</p>
                                 </div>
                                 <div style={styles.csBlock}>
-                                    <span style={styles.csLabel}>Solution:</span>
+                                    <span style={styles.csLabel}>{t('caseStudies.solution')}</span>
                                     <p style={styles.csText}>{study.solution}</p>
                                 </div>
                             </div>
@@ -146,7 +148,7 @@ const CaseStudies = () => {
                     viewport={{ once: true }}
                     style={styles.partnersBanner}
                 >
-                    <h3 style={styles.partnersTitle}>Trusted Partners</h3>
+                    <h3 style={styles.partnersTitle}>{t('caseStudies.trustedPartners')}</h3>
                     <div style={styles.partnersGrid}>
                         {trustedPartners.map((partner, index) => (
                             <motion.div

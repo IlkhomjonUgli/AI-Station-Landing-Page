@@ -1,47 +1,50 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../utils/contexts';
 
 const InnovationGallery = () => {
+    const { t, language } = useLanguage();
+
     const galleryItems = [
         {
             id: 1,
-            title: 'Hackathons & Demo Days',
-            description: 'Teams presenting innovative AI solutions',
+            title: t('innovationGallery.item1Title'),
+            description: t('innovationGallery.item1Description'),
             category: 'events',
             size: 'large'
         },
         {
             id: 2,
-            title: 'Hands-on Workshops',
-            description: 'Intensive classroom sessions',
+            title: t('innovationGallery.item2Title'),
+            description: t('innovationGallery.item2Description'),
             category: 'learning',
             size: 'medium'
         },
         {
             id: 3,
-            title: 'Corporate Partnerships',
-            description: 'Networking with Aloqabank & partners',
+            title: t('innovationGallery.item3Title'),
+            description: t('innovationGallery.item3Description'),
             category: 'networking',
             size: 'medium'
         },
         {
             id: 4,
-            title: 'Mentor Sessions',
-            description: 'One-on-one guidance from experts',
+            title: t('innovationGallery.item4Title'),
+            description: t('innovationGallery.item4Description'),
             category: 'mentorship',
             size: 'small'
         },
         {
             id: 5,
-            title: 'Team Building',
-            description: 'Collaborative problem solving',
+            title: t('innovationGallery.item5Title'),
+            description: t('innovationGallery.item5Description'),
             category: 'community',
             size: 'small'
         },
         {
             id: 6,
-            title: 'Award Ceremonies',
-            description: 'Celebrating innovation achievements',
+            title: t('innovationGallery.item6Title'),
+            description: t('innovationGallery.item6Description'),
             category: 'events',
             size: 'small'
         }
@@ -73,10 +76,10 @@ const InnovationGallery = () => {
                     viewport={{ once: true }}
                     style={styles.header}
                 >
-                    <span style={styles.kicker}>LIFE AT STATION</span>
-                    <h2 style={styles.title}>The Innovation Atmosphere</h2>
+                    <span style={styles.kicker}>{t('innovationGallery.kicker')}</span>
+                    <h2 style={styles.title}>{t('innovationGallery.title')}</h2>
                     <p style={styles.subtitle}>
-                        Where ideas transform into reality, one workshop at a time
+                        {t('innovationGallery.subtitle')}
                     </p>
                 </motion.div>
 
@@ -126,7 +129,7 @@ const InnovationGallery = () => {
                     style={styles.cta}
                 >
                     <p style={styles.ctaText}>
-                        🎥 Want to see more? Follow us on social media for live updates from our community.
+                        {t('innovationGallery.ctaText')}
                     </p>
                 </motion.div>
             </div>

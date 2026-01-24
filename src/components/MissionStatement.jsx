@@ -1,24 +1,27 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../utils/contexts';
 
 const MissionStatement = () => {
+    const { t, language } = useLanguage();
+
     const coreAims = [
         {
             number: '01',
-            title: 'Attract Regional Talent',
-            description: 'Draw the brightest minds from Central Eurasia and connect them with global partners and opportunities.',
+            title: t('missionStatement.aim1Title'),
+            description: t('missionStatement.aim1Description'),
             icon: '🌐'
         },
         {
             number: '02',
-            title: 'Co-Create with Corporations',
-            description: 'Partner with industry leaders to develop practical AI solutions that address real business challenges.',
+            title: t('missionStatement.aim2Title'),
+            description: t('missionStatement.aim2Description'),
             icon: '🤝'
         },
         {
             number: '03',
-            title: 'Develop AI Entrepreneurs',
-            description: 'Nurture the next generation of AI-driven founders who will build the companies of tomorrow.',
+            title: t('missionStatement.aim3Title'),
+            description: t('missionStatement.aim3Description'),
             icon: '🚀'
         }
     ];
@@ -32,11 +35,10 @@ const MissionStatement = () => {
                     viewport={{ once: true }}
                     style={styles.header}
                 >
-                    <span style={styles.kicker}>OUR MISSION</span>
-                    <h2 style={styles.title}>Building the AI Economy of Central Eurasia</h2>
+                    <span style={styles.kicker}>{t('missionStatement.kicker')}</span>
+                    <h2 style={styles.title}>{t('missionStatement.title')}</h2>
                     <p style={styles.subtitle}>
-                        AI Station exists at the intersection of education, innovation, and industry—creating
-                        a thriving ecosystem where ideas become reality.
+                        {t('missionStatement.subtitle')}
                     </p>
                 </motion.div>
 
