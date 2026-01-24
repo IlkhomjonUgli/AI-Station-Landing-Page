@@ -51,6 +51,7 @@ const translations = {
       applyNow: 'Apply Now'
     },
     hero: {
+      kicker: 'CENTRAL EURASIA\'S INNOVATION HUB',
       title: 'The AI Hub of Uzbekistan',
       subtitle: 'Where innovation meets opportunity. Build, learn, and grow with Central Asia\'s leading AI ecosystem for education, research, and business transformation.',
       getStarted: 'Join the Hub',
@@ -58,7 +59,11 @@ const translations = {
       studentsServed: 'Community Members',
       engagementRate: 'Success Rate',
       programsOffered: 'Programs & Services',
-      jobPlacement: 'Career Placements'
+      jobPlacement: 'Career Placements',
+      startupsIncubated: 'Startups Incubated',
+      hoursInnovation: 'Hours of Innovation',
+      globalMentors: 'Global Mentors',
+      corporatePartners: 'Major Corporate Partners'
     },
     sections: {
       services: 'Our Services',
@@ -254,6 +259,7 @@ const translations = {
       applyNow: 'Ro\'yxatdan o\'tish'
     },
     hero: {
+      kicker: 'MARKAZIY OSIYONING INNOVATSIYA MARKAZI',
       title: 'O\'zbekistonning AI Markazi',
       subtitle: 'Innovatsiya va imkoniyatlar birlashgan joy. Markaziy Osiyoning yetakchi AI ekotizimida o\'rganing, yarating va rivojlaning.',
       getStarted: 'Qo\'shiling',
@@ -261,7 +267,11 @@ const translations = {
       studentsServed: 'Jamiyat a\'zolari',
       engagementRate: 'Muvaffaqiyat darajasi',
       programsOffered: 'Dasturlar va Xizmatlar',
-      jobPlacement: 'Karyera joylashtirish'
+      jobPlacement: 'Karyera joylashtirish',
+      startupsIncubated: 'Inkubatsiya qilingan startaplar',
+      hoursInnovation: 'Innovatsiya soatlari',
+      globalMentors: 'Global mentorlar',
+      corporatePartners: 'Asosiy korporativ hamkorlar'
     },
     sections: {
       services: 'Bizning Xizmatlarimiz',
@@ -457,6 +467,7 @@ const translations = {
       applyNow: 'Записаться'
     },
     hero: {
+      kicker: 'ИННОВАЦИОННЫЙ ХАБ ЦЕНТРАЛЬНОЙ ЕВРАЗИИ',
       title: 'AI Хаб Узбекистана',
       subtitle: 'Где инновации встречаются с возможностями. Учитесь, создавайте и развивайтесь в ведущей AI экосистеме Центральной Азии.',
       getStarted: 'Присоединиться',
@@ -464,7 +475,11 @@ const translations = {
       studentsServed: 'Членов сообщества',
       engagementRate: 'Показатель успеха',
       programsOffered: 'Программы и Услуги',
-      jobPlacement: 'Трудоустройство'
+      jobPlacement: 'Трудоустройство',
+      startupsIncubated: 'Стартапов инкубировано',
+      hoursInnovation: 'Часов инноваций',
+      globalMentors: 'Глобальных менторов',
+      corporatePartners: 'Крупных корпоративных партнеров'
     },
     sections: {
       services: 'Наши Услуги',
