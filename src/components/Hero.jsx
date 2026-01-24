@@ -5,7 +5,7 @@ import { fadeInUp } from '../utils/helpers';
 import { useLanguage } from '../utils/contexts';
 
 const Hero = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <section style={heroStyles.section}>

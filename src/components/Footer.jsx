@@ -5,7 +5,7 @@ import { useLanguage } from '../utils/contexts';
 import { validateEmail } from '../utils/helpers';
 
 const Footer = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState({ type: '', message: '' });
 

@@ -4,7 +4,7 @@ import { animateCounter } from '../utils/helpers';
 import { useLanguage } from '../utils/contexts';
 
 const StatsCounter = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   const [counters, setCounters] = useState([
     { value: 0, target: 300, suffix: '+', label: t('hero.studentsServed') },
@@ -13,6 +13,16 @@ const StatsCounter = () => {
     { value: 0, target: 92, suffix: '%', label: t('hero.jobPlacement') }
   ]);
   const sectionRef = useRef(null);
+
+  // Update counter labels when language changes
+  useEffect(() => {
+    setCounters([
+      { value: counters[0].value, target: 300, suffix: '+', label: t('hero.studentsServed') },
+      { value: counters[1].value, target: 95, suffix: '%', label: t('hero.engagementRate') },
+      { value: counters[2].value, target: 5, suffix: '+', label: t('hero.programsOffered') },
+      { value: counters[3].value, target: 92, suffix: '%', label: t('hero.jobPlacement') }
+    ]);
+  }, [language]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
