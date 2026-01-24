@@ -11,6 +11,7 @@ import analyticsRoutes from './routes/analytics.js';
 import serviceRoutes from './routes/services.js';
 import programRoutes from './routes/programs.js';
 import portfolioRoutes from './routes/portfolio.js';
+import sitemapRoutes from './routes/sitemap.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import logger, { logInfo } from './utils/logger.js';
 import requestLogger from './middleware/requestLogger.js';
@@ -42,6 +43,7 @@ app.use('/api/analytics', analyticsRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/programs', programRoutes);
 app.use('/api/portfolio', portfolioRoutes);
+app.use('/api', sitemapRoutes); // Sitemap at /api/sitemap.xml
 
 // Health check
 app.get('/health', (req, res) => {

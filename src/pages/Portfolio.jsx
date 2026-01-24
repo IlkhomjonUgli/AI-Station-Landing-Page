@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 import { buildURL, API_ENDPOINTS } from '../config/api';
 import { useLanguage } from '../utils/contexts';
+import { getPageSEO } from '../config/seo';
 
 const Portfolio = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
   const [projects, setProjects] = useState([]);
@@ -57,8 +59,14 @@ const Portfolio = () => {
     ? projects
     : projects.filter(project => project.category === selectedCategory);
 
+  // Get SEO metadata for portfolio page
+  const pageSEO = getPageSEO('portfolio', language);
+
   return (
     <div style={styles.page}>
+      {/* SEO Meta Tags */}
+      <SEO {...pageSEO} language={language} />
+
       {/* Hero Section */}
       <section style={styles.hero}>
         <div className="container">

@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import BlogCard from '../components/BlogCard';
+import SEO from '../components/SEO';
 import { buildURL, API_ENDPOINTS } from '../config/api';
+import { useLanguage } from '../utils/contexts';
+import { getPageSEO } from '../config/seo';
 
 const AllBlogPage = () => {
+    const { language } = useLanguage();
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     // Removed useNavigate as per instruction, replaced with Link component in JSX
@@ -28,8 +32,14 @@ const AllBlogPage = () => {
         fetchAllBlogs();
     }, []);
 
+    // Get SEO metadata for blog page
+    const pageSEO = getPageSEO('blog', language);
+
     return (
         <div style={styles.container}>
+            {/* SEO Meta Tags */}
+            <SEO {...pageSEO} language={language} />
+
             <div className="container">
                 {/* Header */}
                 <motion.div

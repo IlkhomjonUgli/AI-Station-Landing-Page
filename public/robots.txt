@@ -1,0 +1,54 @@
+# Robots.txt for AI Station
+# Explicitly allowing AI crawlers for Generative Engine Optimization (GEO)
+
+# Allow all search engines
+User-agent: *
+Allow: /
+
+# Explicitly allow AI crawlers (GEO optimization)
+# This signals that we WANT to be indexed by generative engines
+
+# OpenAI GPT crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic Claude crawler
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google's AI crawler
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity AI crawler
+User-agent: PerplexityBot
+Allow: /
+
+# Common crawler
+User-agent: CCBot
+Allow: /
+
+# Other AI/ML research crawlers
+User-agent: omgili
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# Disallow admin routes (keep admin panel private)
+User-agent: *
+Disallow: /admin/
+Disallow: /api/auth/
+
+# Sitemap location
+Sitemap: https://aistation.uz/api/sitemap.xml
+
+# Crawl-delay (optional, prevents server overload)
+# User-agent: *
+# Crawl-delay: 1

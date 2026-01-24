@@ -13,11 +13,15 @@ import ProgramCard from '../components/ProgramCard';
 import ContactForm from '../components/ContactForm';
 import BlogCard from '../components/BlogCard';
 import NewsCard from '../components/NewsCard';
+import SEO from '../components/SEO';
+import StructuredData from '../components/StructuredData';
 import { useLanguage } from '../utils/contexts';
 import { buildURL, API_ENDPOINTS } from '../config/api';
+import { getPageSEO } from '../config/seo';
+import { generateOrganizationSchema, generateLocalBusinessSchema, generateWebSiteSchema } from '../utils/structuredData';
 
 const Home = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [selectedServiceCategory, setSelectedServiceCategory] = useState('all');
   const [selectedPortfolioCategory, setSelectedPortfolioCategory] = useState('all');
   const [blogPosts, setBlogPosts] = useState([]);
@@ -167,8 +171,22 @@ const Home = () => {
     { id: 3, ...t('resources.nlpMasterclass'), popular: true }
   ];
 
+  // Get SEO metadata for home page
+  const pageSEO = getPageSEO('home', language);
+
+  // Generate structured data schemas
+  const organizationSchema = generateOrganizationSchema(language);
+  const localBusinessSchema = generateLocalBusinessSchema(language);
+  const websiteSchema = generateWebSiteSchema();
+
   return (
     <div style={{ paddingTop: '80px' }}>
+      {/* SEO Meta Tags */}
+      <SEO {...pageSEO} language={language} />
+
+      {/* Structured Data (JSON-LD) */}
+      <StructuredData data={[organizationSchema, localBusinessSchema, websiteSchema]} />
+
       {/* Hero Section */}
       <section id="home">
         <Hero />

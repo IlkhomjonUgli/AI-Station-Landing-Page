@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SEO from '../components/SEO';
+import StructuredData from '../components/StructuredData';
+import { useLanguage } from '../utils/contexts';
+import { getPageSEO } from '../config/seo';
+import { generateCourseSchema, generateItemListSchema } from '../utils/structuredData';
 
 const Programs = () => {
+  const { language } = useLanguage();
   const [activeTab, setActiveTab] = useState('academy');
 
   // AIS Academy - Professional Tracks
@@ -132,8 +138,21 @@ const Programs = () => {
     }
   ];
 
+  // Get SEO metadata for programs page
+  const pageSEO = getPageSEO('programs', language);
+
+  // Generate course schemas for all programs
+  const allPrograms = [...professionalTracks, ...specializedBootcamps];
+  const courseSchemas = allPrograms.map(program => generateCourseSchema(program, language));
+
   return (
     <div style={{ paddingTop: '100px', minHeight: '100vh' }}>
+      {/* SEO Meta Tags */}
+      <SEO {...pageSEO} language={language} />
+
+      {/* Structured Data (JSON-LD) for Courses */}
+      <StructuredData data={courseSchemas} />
+
       {/* Hero Section */}
       <section style={styles.heroSection}>
         <div className="container">

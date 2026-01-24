@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import NewsCard from '../components/NewsCard';
+import SEO from '../components/SEO';
 import { buildURL, API_ENDPOINTS } from '../config/api';
+import { useLanguage } from '../utils/contexts';
+import { getPageSEO } from '../config/seo';
 
 const AllNewsPage = () => {
+    const { language } = useLanguage();
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -26,8 +30,14 @@ const AllNewsPage = () => {
         fetchAllNews();
     }, []);
 
+    // Get SEO metadata for news page
+    const pageSEO = getPageSEO('news', language);
+
     return (
         <div style={styles.container}>
+            {/* SEO Meta Tags */}
+            <SEO {...pageSEO} language={language} />
+
             <div className="container">
                 {/* Header */}
                 <motion.div

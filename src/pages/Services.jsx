@@ -1,8 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
+import StructuredData from '../components/StructuredData';
+import { useLanguage } from '../utils/contexts';
+import { getPageSEO } from '../config/seo';
+import { generateServiceSchema } from '../utils/structuredData';
 
 const Services = () => {
+  const { language } = useLanguage();
   // Engagement Models (The 3 Formats)
   const engagementModels = [
     {
@@ -65,8 +71,20 @@ const Services = () => {
     { icon: '🏭', name: 'Manufacturing & Industrial', caseStudy: null }
   ];
 
+  // Get SEO metadata for services page
+  const pageSEO = getPageSEO('services', language);
+
+  // Generate service schemas
+  const serviceSchemas = engagementModels.map(service => generateServiceSchema(service, language));
+
   return (
     <div style={styles.page}>
+      {/* SEO Meta Tags */}
+      <SEO {...pageSEO} language={language} />
+
+      {/* Structured Data (JSON-LD) for Services */}
+      <StructuredData data={serviceSchemas} />
+
       {/* Hero Section */}
       <section style={styles.hero}>
         <div className="container">
