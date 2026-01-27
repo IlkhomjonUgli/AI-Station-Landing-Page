@@ -141,7 +141,12 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   overflow-x: hidden;
-  transition: background-color var(--transition-base), color var(--transition-base);
+  transition: background-image var(--transition-slow), background-color var(--transition-base), color var(--transition-base);
+}
+
+/* Dark mode background */
+[data-theme="dark"] body {
+  background-image: url('/dark-background.png');
 }
 
 /* ============================================
