@@ -304,10 +304,14 @@ const navStyles = {
     right: 0,
     zIndex: 1000,
     padding: '1.25rem 0',
-    background: isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
+    background: isScrolled
+      ? theme === 'dark'
+        ? 'rgba(10, 10, 26, 0.95)'
+        : 'rgba(255, 255, 255, 0.95)'
+      : 'transparent',
     backdropFilter: isScrolled ? 'blur(10px)' : 'none',
     boxShadow: 'none',
-    borderBottom: 'none',
+    borderBottom: isScrolled && theme === 'dark' ? '1px solid rgba(107, 151, 252, 0.1)' : 'none',
     transition: 'all 0.3s ease'
   }),
   container: {
